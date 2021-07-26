@@ -1,0 +1,12 @@
+{
+  "name": "nidusapp",
+  "displayName": "nidus-app",
+  "expo": {
+    "name": "nidus-app",
+    "slug": "nidus-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
