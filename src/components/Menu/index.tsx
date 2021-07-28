@@ -29,8 +29,8 @@ export const Menu = () => {
         </TouchableOpacity>
       </ContainerAdd>
       <TouchableOpacity>
-      <Clock name="clock"></Clock></TouchableOpacity>
+        <Clock name="clock"></Clock></TouchableOpacity>
       <TouchableOpacity>
-      <Settings name="cog"></Settings></TouchableOpacity>
+        <Settings name="cog"></Settings></TouchableOpacity>
     </Container>);
 }

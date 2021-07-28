@@ -6,7 +6,7 @@ position: relative;
   background-color: ${({ theme }) => theme.colors.secondary};
   border-radius:20px;
   max-height: 120px;
-  margin-top:50px;
+  margin-top:20px;
   flex: 1;
   flex-direction:row;
   justify-content: space-around;

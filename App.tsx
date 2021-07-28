@@ -2,6 +2,7 @@ import React from 'react';
 // import AppLoading from 'expo-app-loading';
 import { Auth } from './src/pages/Auth';
 import { Dashboard } from './src/pages/Dashboard'
+import { AddNote } from './src/pages/AddNote'
 import { ThemeProvider } from 'styled-components';
 import theme from './src/global/styles/theme';
 
@@ -28,7 +29,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Dashboard />
+      <AddNote />
     </ThemeProvider>
   );
 }

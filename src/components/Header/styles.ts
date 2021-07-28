@@ -4,11 +4,11 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.secondary};
   border-radius:20px;
   max-height: 150px;
-  margin-bottom:50px;
+  margin-bottom:20px;
   flex: 1;
   flex-direction:row;
   align-items: flex-end;
-  padding:10px 40px;
+  padding:20px 50px;
 `;
 
 export const Data = styled.Text`
@@ -34,10 +34,8 @@ export const Month = styled.Text`
   font-size: 13px;
 `;
 
-export const UserPhoto = styled.View`
-  flex: 1;
-  min-height: 50px;
-  max-width: 50px;
-  border:1px solid red;
-  border-radius:25px;
+export const UserPhoto = styled.Image`
+  border-radius: 25px;
+  height: 50px;
+  width: 50px;
 `;
