@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
+import theme from '../../global/styles/theme';
 
 export const Container = styled.View`
+  background-color: ${({ theme }) => theme.colors.secondary};
   padding: 20px 50px;
   flex: 1;
   justify-content: center;
@@ -14,22 +16,25 @@ export const Logo = styled.Image`
 `;
 
 export const LargeTitle = styled.Text`
-  font-size: 32px;
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: 28px;
   text-align: center;
-  font-weight: bold;
   margin: 20px;
+  font-family: ${({theme}) => theme.fonts.bold};
 `;
 
 export const Title1 = styled.Text`
   font-size: 15px;
-  color: #666666;
+  color: ${({ theme }) => theme.colors.alternative};
+  font-family: ${({theme}) => theme.fonts.regular};
   text-align: center;
   margin: 20px;
 `;
 
 export const TwitterButton = styled.TouchableOpacity`
   margin: 20px;
-  background-color: black;
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.secondary};
   border-radius: 5px;
   align-items: center;
   justify-content: center;
@@ -47,6 +52,7 @@ export const TwitterButtonLogo = styled.Image`
 `;
 
 export const TwitterButtonText = styled.Text`
-  color: white;
-  font-size: 18px;
+font-family: ${({theme}) => theme.fonts.semiBold};
+  color: ${({ theme }) => theme.colors.secondary};
+  font-size: 15px;
 `;
