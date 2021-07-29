@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 
-import { API_KEY, API_SECRET_KEY } from 'react-native-dotenv';
+// import { API_KEY, API_SECRET_KEY } from 'react-native-dotenv';
 
 import { Header } from '../../components/Header'
 import { Menu } from '../../components/Menu';
@@ -45,7 +45,6 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
 
   const { credentials }: { credentials: Credentials } = route.params;
 
-
   const handleAddNotes = (newNotes: [Note]) => {
     setNotes(newNotes);
     setPage('ListNote');
@@ -56,12 +55,24 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
     setPage('ListReminder');
   }
 
+  const handleLogout = async () => {
+    navigation.navigate("Auth");
+  }
+
   // useEffect(() => {
   //   console.log(credentials)
   // }, []);
 
 
   const test = async () => {
+    // const response = await fetch('http://0.0.0.0:8080/teste');
+
+    // fetch('http://0.0.0.0:8080/login', {
+    //   method: 'POST',
+    //   body: JSON.stringify(credentials)
+    // })
+
+    // console.log(await response.json());
   }
 
   const renderContent = (page: string) => {
@@ -83,7 +94,7 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
 
   return (
     <S.Container>
-      <Header></Header>
+      <Header logout={handleLogout}></Header>
       <S.Main>
         {renderContent(page)}
       </S.Main>

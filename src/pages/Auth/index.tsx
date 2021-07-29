@@ -4,6 +4,7 @@ import Auth0 from 'react-native-auth0';
 import { DOMAIN, CLIENT_ID } from 'react-native-dotenv';
 import { Alert } from 'react-native';
 const auth0 = new Auth0({ domain: DOMAIN, clientId: CLIENT_ID });
+import axios from 'axios';
 
 interface AuthProps {
   navigation: any;

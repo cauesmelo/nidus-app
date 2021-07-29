@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
+import axios from 'axios';
 
 import {
   Container,
@@ -15,7 +16,7 @@ import {
 import * as S from './styles';
 
 
-export const Menu = ({ setPage, page, test }: any) => {
+export const Menu = ({ setPage, page }: any) => {
 
   const handleNote = () => {
     setPage("ListNote")
@@ -31,6 +32,9 @@ export const Menu = ({ setPage, page, test }: any) => {
     } else {
       setPage("AddReminder")
     }
+  }
+
+  const test = async() => {
   }
 
   return (

@@ -15,7 +15,9 @@ export const ListReminder = ({ reminders }: any) => {
           {
             reminders.length > 0 ?
               reminders.map((r: any) => (
-                <S.CardNote key={r.text}>{r.text}</S.CardNote>
+                <S.CardNote key={r.text}>
+                  <Text>{r.text} - {r.date.toString()}</Text>
+                </S.CardNote>
               ))
               :
               <Text>Nehuma nota criada</Text>

@@ -13,17 +13,17 @@ import * as S from './styles';
 import { TouchableOpacity, Text } from 'react-native';
 import { useEffect } from 'react';
 
-export const Header = () => {
+export const Header = ({ logout }: any) => {
 
   const [display, setDisplay] = useState('none');
 
-  const handlePhotoPress = () => {
-    if(display === 'none') setDisplay('flex');
+  const handlePhotoPress = ({ logout }: any) => {
+    if (display === 'none') setDisplay('flex');
     else setDisplay('none');
   }
 
   const handleLogout = () => {
-    console.log('logout')
+    logout();
   }
 
   return (<Container>
