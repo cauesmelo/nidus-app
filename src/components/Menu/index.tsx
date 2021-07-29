@@ -12,25 +12,51 @@ import {
   Settings,
 } from './styles';
 
-export const Menu = () => {
+import * as S from './styles';
+
+
+export const Menu = ({ setPage, page }: any) => {
+
+  const handleNote = () => {
+    setPage("ListNote")
+  }
+
+  const handleReminder = () => {
+    setPage("ListReminder")
+  }
+
+  const handleAdd = () => {
+    if (page === 'ListNote') {
+      setPage("AddNote")
+    } else {
+      setPage("AddReminder")
+    }
+  }
+
   return (
     <Container>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={handleNote}>
         <Diary name="book"></Diary>
       </TouchableOpacity>
+
       <TouchableOpacity>
         <Todo name="list"></Todo>
       </TouchableOpacity>
+
       <ContainerAdd>
         <TouchableOpacity>
           <AddBackground>
-            <Add name="plus"></Add>
+            <Add name="plus" onPress={handleAdd}></Add>
           </AddBackground>
         </TouchableOpacity>
       </ContainerAdd>
+
       <TouchableOpacity>
-        <Clock name="clock"></Clock></TouchableOpacity>
+        <Clock name="clock" onPress={handleReminder}></Clock>
+      </TouchableOpacity>
+
       <TouchableOpacity>
-        <Settings name="cog"></Settings></TouchableOpacity>
+        <Settings name="cog"></Settings>
+      </TouchableOpacity>
     </Container>);
 }

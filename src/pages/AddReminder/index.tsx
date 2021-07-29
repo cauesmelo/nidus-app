@@ -1,25 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Header } from '../../components/Header'
 import { Container, Main, MainContainer } from './styles';
-import { Menu } from '../../components/Menu';
 import { Input } from '../../components/Forms/Input';
 import { Button } from '../../components/Forms/Button';
+import * as G from '../../global/styles/global';
 
-export const AddReminder = () => {
+export const AddReminder = ({ setReminders, reminders }: any) => {
+
+  const [text, setText] = useState('');
+
+  const handleAddReminder = () => {
+    const newReminder = {
+      text: text
+    }
+
+    const newArrayOfReminders = reminders;
+
+    newArrayOfReminders.push(newReminder);
+
+    setReminders(newArrayOfReminders);
+  }
+
+  const handleGetText = (text: string) => {
+    setText(text);
+  }
 
   return (
     <Container>
-      <Header/>
       <MainContainer>
-      <Main>
-        <Input placeholder="Insira a descrição do seu lembrete aqui" multiline={true}
-        maxLength={280}
-        ></Input>
-        <Button title="Inserir lembrete"></Button>
-      </Main>
+        <Main>
+          <G.Title>Criar lembrete</G.Title>
+          <Input placeholder="Insira seu lembrete aqui" multiline={true}
+            maxLength={280} getText={(r: string) => handleGetText(r)}
+          />
+          <Button title="Inserir lembrete" onPress={handleAddReminder}/>
+        </Main>
       </MainContainer>
-      <Menu/>
     </Container>
   )
 }

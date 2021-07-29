@@ -1,25 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Header } from '../../components/Header'
-import { Container, Main, MainContainer } from './styles';
 import { Menu } from '../../components/Menu';
 import { Input } from '../../components/Forms/Input';
 import { Button } from '../../components/Forms/Button';
 
-export const AddNote = () => {
+import * as S from './styles';
+import * as G from '../../global/styles/global';
+
+interface Note {
+  text: string;
+}
+
+
+export const AddNote = ({ setNotes, notes }: any) => {
+
+  const [text, setText] = useState('');
+
+  const handleAddNote = () => {
+    const newNote = {
+      text: text
+    }
+
+    const newArrayOfNotes = notes;
+
+    newArrayOfNotes.push(newNote);
+
+    setNotes(newArrayOfNotes);
+  }
+
+  const handleGetText = (text: string) => {
+    setText(text);
+  }
 
   return (
-    <Container>
-      <Header/>
-      <MainContainer>
-      <Main>
-        <Input placeholder="Insira sua nota aqui" multiline={true}
-        maxLength={280}
-        ></Input>
-        <Button title="Inserir nota"></Button>
-      </Main>
-      </MainContainer>
-      <Menu/>
-    </Container>
+    <S.Container>
+      <S.MainContainer>
+        <S.Main>
+          <G.Title>Criar nota</G.Title>
+          <Input placeholder="Insira sua nota aqui" multiline={true}
+            maxLength={280} getText={(t: string) => handleGetText(t)}
+          />
+          <Button title="Inserir nota" onPress={handleAddNote}/>
+        </S.Main>
+      </S.MainContainer>
+    </S.Container>
   )
 }

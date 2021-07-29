@@ -4,13 +4,18 @@ import { TextInputProps } from 'react-native';
 
 import { Container, Text, MaxChar } from './styles';
 
-export const Input = ({ ...rest }: TextInputProps) => {
+interface Props extends TextInputProps {
+  getText: (text: string) => void;
+}
+
+export const Input = ({ getText, ...rest }: Props) => {
 
   const [char, setChar] = useState(280);
   const [text, setText] = useState('');
 
   useEffect(() => {
     setChar(280 - text.length);
+    getText(text);
   }, [text]);
 
   return (

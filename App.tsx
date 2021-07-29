@@ -1,11 +1,12 @@
-import React from 'react';
-// import AppLoading from 'expo-app-loading';
-import { Auth } from './src/pages/Auth';
-import { Dashboard } from './src/pages/Dashboard'
-import { AddNote } from './src/pages/AddNote'
-import { ThemeProvider } from 'styled-components';
-import theme from './src/global/styles/theme';
+import 'react-native-gesture-handler';
 
+import React from 'react';
+import AppLoading from 'expo-app-loading';
+import { ThemeProvider } from 'styled-components';
+
+import { AppRoutes } from './src/routes/app.routes';
+
+import theme from './src/global/styles/theme';
 
 import {
   useFonts,
@@ -14,6 +15,7 @@ import {
   Poppins_600SemiBold,
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
+import { Auth } from './src/pages/Auth';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -23,13 +25,13 @@ export default function App() {
     Poppins_700Bold
   });
 
-  // if (!fontsLoaded) {
-  //   return <AppLoading />
-  // }
+  if (!fontsLoaded) {
+    return <AppLoading />
+  }
 
   return (
     <ThemeProvider theme={theme}>
-      <AddNote />
+      <AppRoutes />
     </ThemeProvider>
   );
 }
