@@ -39,3 +39,21 @@ export const UserPhoto = styled.Image`
   height: 50px;
   width: 50px;
 `;
+
+export const EndSessionContainer = styled.TouchableOpacity``;
+
+export const EndSessionButton = styled.View<{ display: string }>`
+display: ${p => p.display};
+opacity: 1;
+border-radius: 10px;
+z-index: 99;
+top: 60px;
+left: -30px;
+position: absolute;
+border:1px solid ${({ theme }) => theme.colors.alternative};
+width: 100px;
+height: 30px;
+align-items: center;
+justify-content: center;
+background-color:white;
+`;

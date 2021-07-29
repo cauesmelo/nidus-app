@@ -15,7 +15,7 @@ import {
 import * as S from './styles';
 
 
-export const Menu = ({ setPage, page }: any) => {
+export const Menu = ({ setPage, page, test }: any) => {
 
   const handleNote = () => {
     setPage("ListNote")
@@ -56,7 +56,7 @@ export const Menu = ({ setPage, page }: any) => {
       </TouchableOpacity>
 
       <TouchableOpacity>
-        <Settings name="cog"></Settings>
+        <Settings name="cog" onPress={test}></Settings>
       </TouchableOpacity>
     </Container>);
 }
