@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-
+import axios from 'axios';
 // import { API_KEY, API_SECRET_KEY } from 'react-native-dotenv';
 
 import { Header } from '../../components/Header'
@@ -65,14 +65,16 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
 
 
   const test = async () => {
-    // const response = await fetch('http://0.0.0.0:8080/teste');
+    // console.log('test')
 
-    // fetch('http://0.0.0.0:8080/login', {
-    //   method: 'POST',
-    //   body: JSON.stringify(credentials)
+    // axios({
+    //   method: 'post',
+    //   url: `http://0.0.0.0:8080/tweet?tweet=asdasdasd`,
+    //   data: {
+    //     accessToken: credentials.accessToken,
+    //     idToken: credentials.idToken
+    //   }
     // })
-
-    // console.log(await response.json());
   }
 
   const renderContent = (page: string) => {
