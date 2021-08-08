@@ -34,10 +34,6 @@ interface Reminder {
   date: Date;
 }
 
-interface UserData {
-  name: string;
-}
-
 export const Dashboard = ({ navigation, route }: DashboardProps) => {
   const [page, setPage] = useState('ListNote');
   const [notes, setNotes] = useState<Note[]>([]);
@@ -58,11 +54,6 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
   const handleLogout = async () => {
     navigation.navigate("Auth");
   }
-
-  // useEffect(() => {
-  //   console.log(credentials)
-  // }, []);
-
 
   const test = async () => {
     // console.log('test')

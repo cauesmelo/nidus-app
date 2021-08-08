@@ -13,9 +13,28 @@ import * as S from './styles';
 import { TouchableOpacity, Text } from 'react-native';
 import { useEffect } from 'react';
 
-export const Header = ({ logout }: any) => {
+interface DateFormat {
+  date: number;
+  weekDay: string;
+  month: string;
+  year: number;
+}
 
+export const Header = ({ logout }: any) => {
   const [display, setDisplay] = useState('none');
+  const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+  const weekDays = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira",
+    "Quinta-feira", "Sexta-feira", "Sábado"];
+
+  const rawDate = new Date();
+  const date: DateFormat = {
+    date: rawDate.getDate(),
+    weekDay: weekDays[rawDate.getDay()],
+    month: months[rawDate.getMonth()],
+    year: rawDate.getFullYear(),
+  }
+
 
   const handlePhotoPress = ({ logout }: any) => {
     if (display === 'none') setDisplay('flex');
@@ -27,10 +46,10 @@ export const Header = ({ logout }: any) => {
   }
 
   return (<Container>
-    <Data>27</Data>
+    <Data>{date.date}</Data>
     <ContainerData>
-      <Weekday>Terça-feira</Weekday>
-      <Month>Julho 2021</Month>
+      <Weekday>{date.weekDay}</Weekday>
+      <Month>{date.month} {date.year}</Month>
     </ContainerData>
     <S.EndSessionContainer onPress={handlePhotoPress}>
       <UserPhoto source={{ uri: 'https://pbs.twimg.com/profile_images/1371459187402760197/-k-drKxY_400x400.jpg' }}

@@ -15,7 +15,6 @@ import {
   Poppins_600SemiBold,
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
-import { Auth } from './src/pages/Auth';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
