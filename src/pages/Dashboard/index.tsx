@@ -17,14 +17,6 @@ interface DashboardProps {
   route: any;
 }
 
-interface Credentials {
-  accessToken: string;
-  expiresIn: number;
-  idToken: string;
-  scope: string;
-  tokenType: string;
-}
-
 interface Note {
   text: string;
   nextNote: Note;
@@ -54,8 +46,19 @@ interface Settings {
   NotifyPush: boolean;
 }
 
-interface userData {
+interface User {
   accountId: string;
+  image: string;
+  twitterToken: string;
+  twitterSecret: string;
+  twitterNick: string;
+  email: string;
+  createdAt: Date;
+}
+
+interface UserData {
+  accountId: string;
+  image: string;
   settings: Settings;
   twitterToken: string;
   twitterSecret: string;
@@ -69,13 +72,32 @@ interface userData {
 
 export const Dashboard = ({ navigation, route }: DashboardProps) => {
   const [page, setPage] = useState('ListNote');
+  const [settings, setSettings] = useState<Settings>({} as Settings);
+  const [user, setUser] = useState<User>({} as User);
   const [notes, setNotes] = useState<Note[]>([]);
   const [reminders, setReminders] = useState<Reminder[]>([]);
+  const [tasklist, setTasklist] = useState<Tasklist[]>([]);
 
-  const { credentials }: { credentials: Credentials } = route.params;
+  const userData: UserData = route.params;
 
-  const handleAddNotes = (newNotes: [Note]) => {
-    setNotes(newNotes);
+  useEffect(() => {
+    setSettings(userData.settings);
+    setUser({
+      accountId: userData.accountId,
+      image: userData.image,
+      twitterToken: userData.twitterToken,
+      twitterSecret: userData.twitterSecret,
+      twitterNick: userData.twitterNick,
+      email: userData.email,
+      createdAt: userData.createdAt,
+    });
+    setNotes(userData.notes);
+    setReminders(userData.reminders);
+    setTasklist(userData.tasklists);
+  }, []);
+
+  const handleAddNote = (newNote: [Note]) => {
+    setNotes(newNote);
     setPage('ListNote');
   }
 
@@ -87,44 +109,27 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
   const handleLogout = async () => {
     navigation.navigate("Auth");
   }
-
-  const test = async () => {
-    // console.log('test')
-
-    // axios({
-    //   method: 'post',
-    //   url: `http://0.0.0.0:8080/tweet?tweet=asdasdasd`,
-    //   data: {
-    //     accessToken: credentials.accessToken,
-    //     idToken: credentials.idToken
-    //   }
-    // })
-  }
-
+  // GAMBIARROU BB 🤫
   const renderContent = (page: string) => {
     switch (page) {
       case 'ListNote':
         return <ListNote notes={notes} />
-        break;
       case 'AddNote':
-        return <AddNote setNotes={(t: [Note]) => handleAddNotes(t)} notes={notes} />
-        break;
+        return <AddNote setNote={(t: [Note]) => handleAddNote(t)} notes={notes} />
       case 'AddReminder':
         return <AddReminder setReminders={(r: [Reminder]) => handleAddReminders(r)} reminders={reminders} />
-        break;
       case 'ListReminder':
         return <ListReminder reminders={reminders} />
-        break;
     }
   }
 
   return (
     <S.Container>
-      <Header logout={handleLogout}></Header>
+      <Header profileImage={userData.image} logout={handleLogout}></Header>
       <S.Main>
         {renderContent(page)}
       </S.Main>
-      <Menu setPage={(e: string) => setPage(e)} page={page} test={test}></Menu>
+      <Menu setPage={(e: string) => setPage(e)} page={page}></Menu>
     </S.Container>
   )
     ;

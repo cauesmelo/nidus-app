@@ -13,7 +13,7 @@ interface Note {
 }
 
 
-export const AddNote = ({ setNotes, notes }: any) => {
+export const AddNote = ({ setNote, notes }: any) => {
 
   const [text, setText] = useState('');
 
@@ -26,7 +26,7 @@ export const AddNote = ({ setNotes, notes }: any) => {
 
     newArrayOfNotes.push(newNote);
 
-    setNotes(newArrayOfNotes);
+    setNote(newArrayOfNotes);
   }
 
   const handleGetText = (text: string) => {

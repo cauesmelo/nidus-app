@@ -51,7 +51,7 @@ interface Settings {
   NotifyPush: boolean;
 }
 
-interface userData {
+interface UserData {
   accountId: string;
   image: string;
   settings: Settings;
@@ -67,7 +67,7 @@ interface userData {
 
 const developmentMode = true;
 
-const mockedUser: userData = {
+const mockedUser: UserData = {
   accountId: '1b0c65b4-b5b0-43d3-9070-f5b712d32b78',
   image: 'https://pbs.twimg.com/profile_images/1371459187402760197/-k-drKxY_400x400.jpg',
   settings: {
@@ -86,8 +86,6 @@ const mockedUser: userData = {
   reminders: [],
   tasklists: []
 }
-
-
 
 export const Auth = ({ navigation }: AuthProps) => {
 
@@ -108,7 +106,7 @@ export const Auth = ({ navigation }: AuthProps) => {
 
     try {
       const credentials = await auth0.webAuth.authorize({ scope: 'openid email profile' });
-      const newUser: userData = {
+      const newUser: UserData = {
         accountId: uuid.v4().toString(),
         image: 'placeholder',
         settings: {
@@ -128,9 +126,8 @@ export const Auth = ({ navigation }: AuthProps) => {
         tasklists: []
       };
 
-      // salva usuario no asyncstorage
       await AsyncStorage.setItem('@nidus:userData', JSON.stringify(newUser));
-
+      
       navigation.navigate("Dashboard", {
         newUser
       });

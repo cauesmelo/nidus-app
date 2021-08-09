@@ -20,7 +20,7 @@ interface DateFormat {
   year: number;
 }
 
-export const Header = ({ logout }: any) => {
+export const Header = ({ profileImage, logout }: { profileImage: string, logout: () => void }) => {
   const [display, setDisplay] = useState('none');
   const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
     "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
@@ -52,7 +52,7 @@ export const Header = ({ logout }: any) => {
       <Month>{date.month} {date.year}</Month>
     </ContainerData>
     <S.EndSessionContainer onPress={handlePhotoPress}>
-      <UserPhoto source={{ uri: 'https://pbs.twimg.com/profile_images/1371459187402760197/-k-drKxY_400x400.jpg' }}
+      <UserPhoto source={{ uri: profileImage }}
       />
       <S.EndSessionButton display={display}>
         <TouchableOpacity onPress={handleLogout}>
