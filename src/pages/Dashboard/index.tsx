@@ -27,11 +27,44 @@ interface Credentials {
 
 interface Note {
   text: string;
+  nextNote: Note;
 }
 
 interface Reminder {
   text: string;
   date: Date;
+}
+
+interface Task {
+  text: string;
+  completed: boolean;
+}
+
+interface Tasklist {
+  text: string;
+  complete: boolean;
+  tasks: Task[];
+}
+
+interface Settings {
+  tweetNote: boolean;
+  tweetReminder: boolean;
+  tweetTasklist: boolean;
+  notifyEmail: boolean;
+  NotifyPush: boolean;
+}
+
+interface userData {
+  accountId: string;
+  settings: Settings;
+  twitterToken: string;
+  twitterSecret: string;
+  twitterNick: string;
+  email: string;
+  createdAt: Date;
+  notes: Note[];
+  reminders: Reminder[];
+  tasklists: Tasklist[];
 }
 
 export const Dashboard = ({ navigation, route }: DashboardProps) => {

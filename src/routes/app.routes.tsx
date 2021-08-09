@@ -6,7 +6,6 @@ import { Auth } from '../pages/Auth';
 import { AddNote } from '../pages/AddNote';
 import { AddReminder } from '../pages/AddReminder';
 import { Dashboard } from '../pages/Dashboard';
-import { Menu } from '../components/Menu';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -14,11 +13,6 @@ export const AppRoutes = () => {
   return (
     <NavigationContainer>
       <Navigator headerMode="none" initialRouteName="Auth">
-
-        <Screen
-          name="Menu"
-          component={Menu}
-        />
 
         <Screen
           name="Auth"

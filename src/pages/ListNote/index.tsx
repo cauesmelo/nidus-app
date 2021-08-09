@@ -1,13 +1,12 @@
 import React from 'react';
 import { Text } from 'react-native';
-
-import { Input } from '../../components/Forms/Input';
-import { Button } from '../../components/Forms/Button';
+import uuid from 'react-native-uuid';
 
 import * as S from './styles';
 import * as G from '../../global/styles/global';
 
 export const ListNote = ({ notes }: any) => {
+
 
   return (
     <S.Container>
