@@ -126,7 +126,9 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
   return (
     <S.Container>
       <Header profileImage={userData.image} logout={handleLogout}></Header>
-      <S.Main>
+      <S.Main
+      bounces={page === 'Settings' ? false : true}
+      >
         {renderContent(page)}
       </S.Main>
       <Menu setPage={(e: string) => setPage(e)} page={page}></Menu>

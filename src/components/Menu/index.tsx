@@ -35,7 +35,7 @@ export const Menu = ({ setPage, page, test }: any) => {
         <S.Todo name="list"></S.Todo>
       </TouchableOpacity>
 
-      <S.ContainerAdd>
+      <S.ContainerAdd page={page}>
         <TouchableOpacity>
           <S.AddBackground>
             <S.Add name="plus" onPress={handleAdd}></S.Add>

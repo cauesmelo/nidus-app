@@ -6,7 +6,6 @@ flex: 1;
 `;
 
 export const Main = styled.ScrollView`
-overflow:scroll;
 flex: 1;
 background-color: ${({ theme }) => theme.colors.alternativeLight};
 border-radius: 20px;

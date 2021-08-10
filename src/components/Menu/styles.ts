@@ -1,6 +1,10 @@
 import styled from 'styled-components/native';
 import { Entypo } from '@expo/vector-icons';
 
+interface ContainerAddProps {
+  page: string;
+}
+
 export const Container = styled.View`
 position: relative;
   background-color: ${({ theme }) => theme.colors.secondary};
@@ -23,7 +27,8 @@ color:${({ theme }) => theme.colors.primary};
 font-size: 50px;
 `;
 
-export const ContainerAdd = styled.View`
+export const ContainerAdd = styled.View<ContainerAddProps>`
+display: ${props => props.page === 'Settings' ? "none" : "flex"};
 padding: 10px;
 border-radius:35px;
 top: -40px;

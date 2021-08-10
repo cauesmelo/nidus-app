@@ -8,7 +8,7 @@ flex: 1;
 export const Main = styled.View`
 background-color: ${({ theme }) => theme.colors.secondary};
 border-radius: 20px;
-padding: 20px;
+padding:10px 20px;
 justify-content: center;
 `;
 
