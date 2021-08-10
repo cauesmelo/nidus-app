@@ -11,7 +11,3 @@ background-color: ${({ theme }) => theme.colors.alternativeLight};
 border-radius: 20px;
 margin: 0 10px;
 `;
-
-export const Footer = styled.View`
-border:1px solid green;
-`;

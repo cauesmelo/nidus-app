@@ -9,9 +9,9 @@ export const ListNote = ({ notes }: any) => {
 
 
   return (
-    <S.Container>
-      <S.MainContainer>
-        <S.Main>
+    <G.Container>
+      <G.MainContainer>
+        <G.Main>
           <G.Title>Notas criadas</G.Title>
           {
             notes.length > 0 ?
@@ -21,8 +21,8 @@ export const ListNote = ({ notes }: any) => {
               :
               <Text>Nehuma nota criada</Text>
           }
-        </S.Main>
-      </S.MainContainer>
-    </S.Container>
+        </G.Main>
+      </G.MainContainer>
+    </G.Container>
   )
 }

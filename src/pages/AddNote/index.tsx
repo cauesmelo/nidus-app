@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import { Header } from '../../components/Header'
-import { Menu } from '../../components/Menu';
 import { Input } from '../../components/Forms/Input';
 import { Button } from '../../components/Forms/Button';
 
@@ -34,16 +32,16 @@ export const AddNote = ({ setNote, notes }: any) => {
   }
 
   return (
-    <S.Container>
-      <S.MainContainer>
-        <S.Main>
+    <G.Container>
+      <G.MainContainer>
+        <G.Main>
           <G.Title>Criar nota</G.Title>
           <Input placeholder="Insira sua nota aqui" multiline={true}
             maxLength={280} getText={(t: string) => handleGetText(t)}
           />
           <Button title="Inserir nota" onPress={handleAddNote}/>
-        </S.Main>
-      </S.MainContainer>
-    </S.Container>
+        </G.Main>
+      </G.MainContainer>
+    </G.Container>
   )
 }

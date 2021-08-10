@@ -57,9 +57,9 @@ export const Settings = ({ settings, setSettings }: { settings: Settings, setSet
     notifyPush])
 
   return (
-    <S.Container>
-      <S.MainContainer>
-        <S.Main>
+    <G.Container>
+      <G.MainContainer>
+        <G.Main>
           <G.Title>Configurações</G.Title>
 
           <G.Title1>Notificações</G.Title1>
@@ -114,8 +114,8 @@ export const Settings = ({ settings, setSettings }: { settings: Settings, setSet
             />
           </S.Setting>
 
-        </S.Main>
-      </S.MainContainer>
-    </S.Container>
+        </G.Main>
+      </G.MainContainer>
+    </G.Container>
   )
 }

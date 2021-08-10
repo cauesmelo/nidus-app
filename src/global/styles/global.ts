@@ -10,13 +10,31 @@ export const LargeTitle = styled.Text`
   font-size: 28px;
   text-align: center;
   margin: 20px;
-  font-family: ${({theme}) => theme.fonts.bold};
+  font-family: ${({ theme }) => theme.fonts.bold};
 `;
 
 export const Title1 = styled.Text`
   font-size: 15px;
   color: ${({ theme }) => theme.colors.alternative};
-  font-family: ${({theme}) => theme.fonts.regular};
+  font-family: ${({ theme }) => theme.fonts.regular};
   text-align: center;
   margin: 20px;
+`;
+
+export const Container = styled.View`
+background-color: ${({ theme }) => theme.colors.alternativeLight};
+flex: 1;
+`;
+
+export const Main = styled.View`
+background-color: ${({ theme }) => theme.colors.secondary};
+border-radius: 20px;
+padding:10px 20px;
+justify-content: center;
+`;
+
+export const MainContainer = styled.View`
+flex: 1;
+justify-content: center;
+margin: 0px;
 `;

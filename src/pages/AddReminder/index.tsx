@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Container, Main, MainContainer } from './styles';
 import { Input } from '../../components/Forms/Input';
 import { Button } from '../../components/Forms/Button';
 import * as G from '../../global/styles/global';
@@ -11,9 +9,8 @@ export const AddReminder = ({ setReminders, reminders }: any) => {
 
   const [text, setText] = useState('');
   const [date, setDate] = useState<Date>(new Date(Date.now()));
-  const [mode, setMode] = useState('datetime');
 
-  const onChange = (event, selectedDate) => {
+  const onChange = (event: any, selectedDate: Date) => {
     const currentDate = selectedDate || date;
     setDate(currentDate);
   };
@@ -40,9 +37,9 @@ export const AddReminder = ({ setReminders, reminders }: any) => {
   }, []);
 
   return (
-    <Container>
-      <MainContainer>
-        <Main>
+    <G.Container>
+      <G.MainContainer>
+        <G.Main>
           <G.Title>Criar lembrete</G.Title>
           <Input placeholder="Insira seu lembrete aqui" multiline={true}
             maxLength={280} getText={(r: string) => handleGetText(r)}
@@ -52,13 +49,15 @@ export const AddReminder = ({ setReminders, reminders }: any) => {
             testID="dateTimePicker"
             value={date}
             display="spinner"
+            // @ts-ignore
             mode='datetime'
             is24Hour={true}
+            // @ts-ignore
             onChange={onChange}
           />
           <Button title="Inserir lembrete" onPress={handleAddReminder} />
-        </Main>
-      </MainContainer>
-    </Container>
+        </G.Main>
+      </G.MainContainer>
+    </G.Container>
   )
 }

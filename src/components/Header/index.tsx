@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
-
-import {
-  Container,
-  ContainerData,
-  Data,
-  Weekday,
-  Month,
-  UserPhoto,
-} from './styles';
+import { TouchableOpacity, Text } from 'react-native';
 
 import * as S from './styles';
-import { TouchableOpacity, Text } from 'react-native';
-import { useEffect } from 'react';
 
 interface DateFormat {
   date: number;
@@ -22,6 +12,7 @@ interface DateFormat {
 
 export const Header = ({ profileImage, logout }: { profileImage: string, logout: () => void }) => {
   const [display, setDisplay] = useState('none');
+
   const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
     "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
   const weekDays = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira",
@@ -35,7 +26,6 @@ export const Header = ({ profileImage, logout }: { profileImage: string, logout:
     year: rawDate.getFullYear(),
   }
 
-
   const handlePhotoPress = ({ logout }: any) => {
     if (display === 'none') setDisplay('flex');
     else setDisplay('none');
@@ -45,14 +35,14 @@ export const Header = ({ profileImage, logout }: { profileImage: string, logout:
     logout();
   }
 
-  return (<Container>
-    <Data>{date.date}</Data>
-    <ContainerData>
-      <Weekday>{date.weekDay}</Weekday>
-      <Month>{date.month} {date.year}</Month>
-    </ContainerData>
+  return (<S.Container>
+    <S.Data>{date.date}</S.Data>
+    <S.ContainerData>
+      <S.Weekday>{date.weekDay}</S.Weekday>
+      <S.Month>{date.month} {date.year}</S.Month>
+    </S.ContainerData>
     <S.EndSessionContainer onPress={handlePhotoPress}>
-      <UserPhoto source={{ uri: profileImage }}
+      <S.UserPhoto source={{ uri: profileImage }}
       />
       <S.EndSessionButton display={display}>
         <TouchableOpacity onPress={handleLogout}>
@@ -60,5 +50,5 @@ export const Header = ({ profileImage, logout }: { profileImage: string, logout:
         </TouchableOpacity>
       </S.EndSessionButton>
     </S.EndSessionContainer>
-  </Container>);
+  </S.Container>);
 }
