@@ -1,20 +1,7 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import axios from 'axios';
-
-import {
-  Container,
-  Diary,
-  Todo,
-  ContainerAdd,
-  AddBackground,
-  Add,
-  Clock,
-  Settings,
-} from './styles';
 
 import * as S from './styles';
-
 
 export const Menu = ({ setPage, page, test }: any) => {
 
@@ -26,6 +13,10 @@ export const Menu = ({ setPage, page, test }: any) => {
     setPage("ListReminder")
   }
 
+  const handleSettings = () => {
+    setPage("Settings")
+  }
+
   const handleAdd = () => {
     if (page === 'ListNote') {
       setPage("AddNote")
@@ -35,29 +26,29 @@ export const Menu = ({ setPage, page, test }: any) => {
   }
 
   return (
-    <Container>
+    <S.Container>
       <TouchableOpacity onPress={handleNote}>
-        <Diary name="book"></Diary>
+        <S.Diary name="book"></S.Diary>
       </TouchableOpacity>
 
       <TouchableOpacity>
-        <Todo name="list"></Todo>
+        <S.Todo name="list"></S.Todo>
       </TouchableOpacity>
 
-      <ContainerAdd>
+      <S.ContainerAdd>
         <TouchableOpacity>
-          <AddBackground>
-            <Add name="plus" onPress={handleAdd}></Add>
-          </AddBackground>
+          <S.AddBackground>
+            <S.Add name="plus" onPress={handleAdd}></S.Add>
+          </S.AddBackground>
         </TouchableOpacity>
-      </ContainerAdd>
+      </S.ContainerAdd>
 
       <TouchableOpacity>
-        <Clock name="clock" onPress={handleReminder}></Clock>
+        <S.Clock name="clock" onPress={handleReminder}></S.Clock>
       </TouchableOpacity>
 
       <TouchableOpacity>
-        <Settings name="cog" onPress={test}></Settings>
+        <S.Settings name="cog" onPress={handleSettings}></S.Settings>
       </TouchableOpacity>
-    </Container>);
+    </S.Container>);
 }

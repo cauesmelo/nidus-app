@@ -10,7 +10,7 @@ overflow:scroll;
 flex: 1;
 background-color: ${({ theme }) => theme.colors.alternativeLight};
 border-radius: 20px;
-margin: 0 20px;
+margin: 0 10px;
 `;
 
 export const Footer = styled.View`

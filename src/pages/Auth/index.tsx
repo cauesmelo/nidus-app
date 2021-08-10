@@ -48,7 +48,7 @@ interface Settings {
   tweetReminder: boolean;
   tweetTasklist: boolean;
   notifyEmail: boolean;
-  NotifyPush: boolean;
+  notifyPush: boolean;
 }
 
 interface UserData {
@@ -75,7 +75,7 @@ const mockedUser: UserData = {
     tweetReminder: true,
     tweetTasklist: true,
     notifyEmail: true,
-    NotifyPush: true
+    notifyPush: true
   },
   twitterToken: 'placeholder',
   twitterSecret: 'placeholder',
@@ -114,7 +114,7 @@ export const Auth = ({ navigation }: AuthProps) => {
           tweetReminder: true,
           tweetTasklist: true,
           notifyEmail: true,
-          NotifyPush: true
+          notifyPush: true
         },
         email: 'cauesmelo@gmail.com',
         createdAt: new Date(Date.now()),

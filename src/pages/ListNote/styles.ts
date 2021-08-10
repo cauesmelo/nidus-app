@@ -15,7 +15,7 @@ justify-content: center;
 export const MainContainer = styled.View`
 flex: 1;
 justify-content: center;
-margin: 0 20px;
+margin: 0px;
 `;
 
 export const CardNote = styled.Text`

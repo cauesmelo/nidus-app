@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-import axios from 'axios';
-// import { API_KEY, API_SECRET_KEY } from 'react-native-dotenv';
 
 import { Header } from '../../components/Header'
 import { Menu } from '../../components/Menu';
@@ -9,6 +6,7 @@ import { ListNote } from '../ListNote';
 import { ListReminder } from '../ListReminder';
 import { AddNote } from '../AddNote';
 import { AddReminder } from '../AddReminder';
+import { Settings } from '../Settings';
 
 import * as S from './styles';
 
@@ -43,7 +41,7 @@ interface Settings {
   tweetReminder: boolean;
   tweetTasklist: boolean;
   notifyEmail: boolean;
-  NotifyPush: boolean;
+  notifyPush: boolean;
 }
 
 interface User {
@@ -120,6 +118,8 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
         return <AddReminder setReminders={(r: [Reminder]) => handleAddReminders(r)} reminders={reminders} />
       case 'ListReminder':
         return <ListReminder reminders={reminders} />
+      case 'Settings':
+        return <Settings setSettings={(settings: Settings) => setSettings(settings)} settings={settings} />
     }
   }
 

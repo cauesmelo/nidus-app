@@ -22,6 +22,21 @@ export const CardNote = styled.Text`
 border:1px solid ${({ theme }) => theme.colors.alternativeLight};
 margin-bottom: 30px;
 border-radius: 5px;
-padding: 10px;
+padding: 0px;
+`;
+
+export const Setting = styled.View`
+border:1px solid ${({ theme }) => theme.colors.alternativeLight};
+padding: 20px;
+flex: 1;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+`;
+
+export const SettingTitle = styled.Text`
+`;
+
+export const SettingHandle = styled.Switch`
 `;
 
