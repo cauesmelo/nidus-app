@@ -5,11 +5,17 @@ interface ContainerAddProps {
   page: string;
 }
 
+interface ClockProps {
+  page: string;
+}
+
+const iconSize = '30px';
+
 export const Container = styled.View`
-position: relative;
+  position: relative;
   background-color: ${({ theme }) => theme.colors.secondary};
   border-radius:20px;
-  max-height: 120px;
+  max-height: 80px;
   margin-top:20px;
   flex: 1;
   flex-direction:row;
@@ -20,11 +26,11 @@ position: relative;
 
 export const Diary = styled(Entypo)`
   color:${({ theme }) => theme.colors.primary};
-  font-size: 50px;
+  font-size: ${iconSize};
 `;
 export const Todo = styled(Entypo)`
 color:${({ theme }) => theme.colors.primary};
-font-size: 50px;
+font-size: ${iconSize};
 `;
 
 export const ContainerAdd = styled.View<ContainerAddProps>`
@@ -47,12 +53,12 @@ color:${({ theme }) => theme.colors.primary};
 font-size: 40px;
 padding:10px;
 `;
-export const Clock = styled(Entypo)`
-margin-left: 50px;
+export const Clock = styled(Entypo)<ClockProps>`
+margin-left:${ props => props.page === 'Settings' ? '0px' : '100px'};
 color:${({ theme }) => theme.colors.primary};
-font-size: 50px;
+font-size: ${iconSize};
 `;
 export const Settings = styled(Entypo)`
 color:${({ theme }) => theme.colors.primary};
-font-size: 50px;
+font-size: ${iconSize};
 `;

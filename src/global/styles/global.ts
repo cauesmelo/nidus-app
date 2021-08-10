@@ -29,12 +29,11 @@ flex: 1;
 export const Main = styled.View`
 background-color: ${({ theme }) => theme.colors.secondary};
 border-radius: 20px;
-padding:10px 20px;
-justify-content: center;
+padding:0px 20px 40px 20px;
+height: 100%;
 `;
 
 export const MainContainer = styled.View`
 flex: 1;
-justify-content: center;
 margin: 0px;
 `;

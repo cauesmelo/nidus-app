@@ -44,7 +44,7 @@ export const Menu = ({ setPage, page, test }: any) => {
       </S.ContainerAdd>
 
       <TouchableOpacity>
-        <S.Clock name="clock" onPress={handleReminder}></S.Clock>
+        <S.Clock name="clock" onPress={handleReminder} page={page}></S.Clock>
       </TouchableOpacity>
 
       <TouchableOpacity>

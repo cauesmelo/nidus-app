@@ -96,7 +96,7 @@ export const Settings = ({ settings, setSettings }: { settings: Settings, setSet
 
           <S.Setting>
             <S.SettingTitle>
-              Sincronizar lista de tarefas
+              Sincronizar listas de tarefas
             </S.SettingTitle>
             <S.SettingHandle
               onValueChange={() => toggleSwitch('tasklist')}
