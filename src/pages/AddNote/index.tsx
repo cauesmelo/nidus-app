@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
-
-import { Input } from '../../components/Forms/Input';
 import { Button } from '../../components/Forms/Button';
-
-import * as S from './styles';
+import { Input } from '../../components/Forms/Input';
 import * as G from '../../global/styles/global';
+import { INote } from '../../global/types';
 
-interface Note {
-  text: string;
-}
-
-
-export const AddNote = ({ setNote, notes }: any) => {
+export const AddNote = ({ setNote, notes }: { setNote: (notes: INote[]) => void, notes: INote[] }) => {
 
   const [text, setText] = useState('');
 
@@ -39,7 +32,7 @@ export const AddNote = ({ setNote, notes }: any) => {
           <Input placeholder="Insira sua nota aqui" multiline={true}
             maxLength={280} getText={(t: string) => handleGetText(t)}
           />
-          <Button title="Inserir nota" onPress={handleAddNote}/>
+          <Button title="Inserir nota" onPress={handleAddNote} />
         </G.Main>
       </G.MainContainer>
     </G.Container>

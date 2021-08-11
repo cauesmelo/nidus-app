@@ -9,65 +9,15 @@ import uuid from 'react-native-uuid';
 
 import * as S from './styles';
 import * as G from '../../global/styles/global';
+import { IUserData } from '../../global/types';
 
 interface AuthProps {
   navigation: any;
 }
 
-interface Credentials {
-  accessToken: string;
-  expiresIn: number;
-  idToken: string;
-  scope: string;
-  tokenType: string;
-}
-
-interface Note {
-  text: string;
-  nextNote: Note;
-}
-
-interface Reminder {
-  text: string;
-  date: Date;
-}
-
-interface Task {
-  text: string;
-  completed: boolean;
-}
-
-interface Tasklist {
-  text: string;
-  complete: boolean;
-  tasks: Task[];
-}
-
-interface Settings {
-  tweetNote: boolean;
-  tweetReminder: boolean;
-  tweetTasklist: boolean;
-  notifyEmail: boolean;
-  notifyPush: boolean;
-}
-
-interface UserData {
-  accountId: string;
-  image: string;
-  settings: Settings;
-  twitterToken: string;
-  twitterSecret: string;
-  twitterNick: string;
-  email: string;
-  createdAt: Date;
-  notes: Note[];
-  reminders: Reminder[];
-  tasklists: Tasklist[];
-}
-
 const developmentMode = true;
 
-const mockedUser: UserData = {
+const mockedUser: IUserData = {
   accountId: '1b0c65b4-b5b0-43d3-9070-f5b712d32b78',
   image: 'https://pbs.twimg.com/profile_images/1371459187402760197/-k-drKxY_400x400.jpg',
   settings: {
@@ -106,7 +56,7 @@ export const Auth = ({ navigation }: AuthProps) => {
 
     try {
       const credentials = await auth0.webAuth.authorize({ scope: 'openid email profile' });
-      const newUser: UserData = {
+      const newUser: IUserData = {
         accountId: uuid.v4().toString(),
         image: 'placeholder',
         settings: {

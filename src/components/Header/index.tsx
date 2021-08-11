@@ -26,7 +26,7 @@ export const Header = ({ profileImage, logout }: { profileImage: string, logout:
     year: rawDate.getFullYear(),
   }
 
-  const handlePhotoPress = ({ logout }: any) => {
+  const handlePhotoPress = () => {
     if (display === 'none') setDisplay('flex');
     else setDisplay('none');
   }

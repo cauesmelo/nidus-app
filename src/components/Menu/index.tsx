@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 
 import * as S from './styles';
 
-export const Menu = ({ setPage, page, test }: any) => {
+export const Menu = ({ setPage, page }: { setPage: (page: string) => void, page: string }) => {
 
   const handleNote = () => {
     setPage("ListNote")

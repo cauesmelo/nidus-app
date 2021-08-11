@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text } from 'react-native';
 import uuid from 'react-native-uuid';
-
-import * as S from './styles';
 import * as G from '../../global/styles/global';
+import * as S from './styles';
+import { INote } from '../../global/types';
 
-export const ListNote = ({ notes }: any) => {
+export const ListNote = ({ notes }: { notes: INote[] }) => {
 
 
   return (
@@ -15,9 +15,12 @@ export const ListNote = ({ notes }: any) => {
           <G.Title>Notas criadas</G.Title>
           {
             notes.length > 0 ?
-              notes.map((n: any) => (
-                <S.CardNote key={n.text}>{n.text}</S.CardNote>
-              ))
+              notes.map((n: INote) => {
+                const key = uuid.v4().toString();
+                return (
+                  <S.CardNote key={key}>{n.text}</S.CardNote>
+                )
+              })
               :
               <Text>Nehuma nota criada</Text>
           }

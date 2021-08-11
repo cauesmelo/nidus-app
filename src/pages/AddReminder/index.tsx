@@ -4,8 +4,9 @@ import { Input } from '../../components/Forms/Input';
 import { Button } from '../../components/Forms/Button';
 import * as G from '../../global/styles/global';
 import { useEffect } from 'react';
+import { IReminder } from '../../global/types';
 
-export const AddReminder = ({ setReminders, reminders }: any) => {
+export const AddReminder = ({ setReminders, reminders }: { setReminders: (reminders: IReminder[]) => void, reminders: IReminder[] }) => {
 
   const [text, setText] = useState('');
   const [date, setDate] = useState<Date>(new Date(Date.now()));
