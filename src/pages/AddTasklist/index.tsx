@@ -21,7 +21,6 @@ export const AddTasklist = ({ setTasklists, tasklists }: { setTasklists: (taskli
   const [checked, setChecked] = useState(false);
 
   const handleAddTasklist = () => {
-    if (tasklist.text === '') Alert.alert('Erro', 'Insira um título para a lista');
     setTasklists([
       ...tasklists,
       tasklist
@@ -149,7 +148,7 @@ export const AddTasklist = ({ setTasklists, tasklists }: { setTasklists: (taskli
           </S.AddTask>
 
           <S.CharCount>{charCount}</S.CharCount>
-          <Button title="Finalizar lista de tarefas" onPress={handleAddTasklist} disabled={tasklist.tasks.length === 0} />
+          <Button title="Finalizar lista de tarefas" onPress={handleAddTasklist} disabled={tasklist.tasks.length === 0 || tasklist.text.length === 0} />
         </G.Main>
       </G.MainContainer>
     </G.Container >
