@@ -43,7 +43,7 @@ export const AddReminder = ({ setReminders, reminders }: { setReminders: (remind
         <G.Main>
           <G.Title>Criar lembrete</G.Title>
           <Input placeholder="Insira seu lembrete aqui" multiline={true}
-            maxLength={280} getText={(r: string) => handleGetText(r)}
+            maxLength={260} getText={(r: string) => handleGetText(r)}
           />
           <DateTimePicker
             style={{ width: '100%', backgroundColor: 'white' }}

@@ -5,7 +5,6 @@ export const Container = styled.View`
 `;
 
 export const Text = styled(TextInput)`
-
 border-radius: 5px;
 height: 150px;
 padding: 10px;

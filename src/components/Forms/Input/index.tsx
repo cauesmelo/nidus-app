@@ -8,19 +8,18 @@ interface Props extends TextInputProps {
   getText: (text: string) => void;
 }
 
-export const Input = ({ getText, ...rest }: Props) => {
-
-  const [char, setChar] = useState(280);
+export const Input = ({ getText, maxLength, ...rest }: Props) => {
+  const [char, setChar] = useState(maxLength);
   const [text, setText] = useState('');
 
   useEffect(() => {
-    setChar(280 - text.length);
+    setChar(maxLength! - text.length);
     getText(text);
   }, [text]);
 
   return (
     <Container >
-      <Text {...rest} onChangeText={(e) => setText(e)} value={text}></Text>
+      <Text {...rest} onChangeText={(e) => setText(e)} value={text} maxLength={maxLength}></Text>
       <MaxChar>{char}</MaxChar>
     </Container>
   )

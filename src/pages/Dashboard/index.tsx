@@ -17,7 +17,7 @@ interface DashboardProps {
 }
 
 export const Dashboard = ({ navigation, route }: DashboardProps) => {
-  const [page, setPage] = useState('ListNote');
+  const [page, setPage] = useState('ListNotes');
   const [settings, setSettings] = useState<ISettings>({} as ISettings);
   const [user, setUser] = useState<IUser>({} as IUser);
   const [notes, setNotes] = useState<INote[]>([]);
@@ -54,7 +54,7 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
 
   const handleAddTasklist = (newTasklists: ITasklist[]) => {
     setTasklists(newTasklists);
-    setPage('ListTasklist')
+    setPage('ListTasklists')
   }
 
   const handleLogout = async () => {
