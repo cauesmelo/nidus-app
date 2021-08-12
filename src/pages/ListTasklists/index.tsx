@@ -6,14 +6,14 @@ import * as S from './styles';
 import * as G from '../../global/styles/global';
 import { ITasklist } from '../../global/types';
 
-export const ListTasklist = ({ tasklists }: { tasklists: ITasklist[] }) => {
+export const ListTasklists = ({ tasklists }: { tasklists: ITasklist[] }) => {
 
 
   return (
     <G.Container>
       <G.MainContainer>
         <G.Main>
-          <G.Title>Listas de tarefas criadas</G.Title>
+          <G.Title>Listas de tarefas</G.Title>
           {
             tasklists.length > 0 ?
               tasklists.map((n: ITasklist) => {
@@ -23,7 +23,7 @@ export const ListTasklist = ({ tasklists }: { tasklists: ITasklist[] }) => {
                 )
               })
               :
-              <Text>Nehuma lista de tarefa criada</Text>
+              <Text>Nenhuma lista de tarefa criada</Text>
           }
         </G.Main>
       </G.MainContainer>

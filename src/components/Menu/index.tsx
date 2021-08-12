@@ -6,22 +6,32 @@ import * as S from './styles';
 export const Menu = ({ setPage, page }: { setPage: (page: string) => void, page: string }) => {
 
   const handleNote = () => {
-    setPage("ListNote")
+    setPage("ListNotes")
   }
 
   const handleReminder = () => {
-    setPage("ListReminder")
+    setPage("ListReminders")
   }
 
   const handleSettings = () => {
     setPage("Settings")
   }
 
+  const handleTasklist = () => {
+    setPage('ListTasklists')
+  }
+
   const handleAdd = () => {
-    if (page === 'ListNote') {
-      setPage("AddNote")
-    } else {
-      setPage("AddReminder")
+    switch (page) {
+      case 'ListNotes':
+        setPage("AddNote");
+        break;
+      case 'ListReminders':
+        setPage('AddReminder');
+        break;
+      case 'ListTasklists':
+        setPage('AddTasklist');
+        break;
     }
   }
 
@@ -31,7 +41,7 @@ export const Menu = ({ setPage, page }: { setPage: (page: string) => void, page:
         <S.Diary name="book"></S.Diary>
       </TouchableOpacity>
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={handleTasklist}>
         <S.Todo name="list"></S.Todo>
       </TouchableOpacity>
 

@@ -4,8 +4,10 @@ import { Menu } from '../../components/Menu';
 import { IUser, IUserData, ISettings, INote, IReminder, ITasklist } from '../../global/types';
 import { AddNote } from '../AddNote';
 import { AddReminder } from '../AddReminder';
-import { ListNote } from '../ListNote';
-import { ListReminder } from '../ListReminder';
+import { AddTasklist } from '../AddTasklist';
+import { ListNotes } from '../ListNotes';
+import { ListReminders } from '../ListReminders';
+import { ListTasklists } from '../ListTasklists';
 import { Settings } from '../Settings';
 import * as S from './styles';
 
@@ -20,7 +22,7 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
   const [user, setUser] = useState<IUser>({} as IUser);
   const [notes, setNotes] = useState<INote[]>([]);
   const [reminders, setReminders] = useState<IReminder[]>([]);
-  const [tasklist, setTasklist] = useState<ITasklist[]>([]);
+  const [tasklists, setTasklists] = useState<ITasklist[]>([]);
 
   const userData: IUserData = route.params;
 
@@ -37,7 +39,7 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
     });
     setNotes(userData.notes);
     setReminders(userData.reminders);
-    setTasklist(userData.tasklists);
+    setTasklists(userData.tasklists);
   }, []);
 
   const handleAddNote = (newNote: INote[]) => {
@@ -50,20 +52,29 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
     setPage('ListReminder');
   }
 
+  const handleAddTasklist = (newTasklists: ITasklist[]) => {
+    setTasklists(newTasklists);
+    setPage('ListTasklist')
+  }
+
   const handleLogout = async () => {
     navigation.navigate("Auth");
   }
   // GAMBIARROU BB 🤫
   const renderContent = (page: string) => {
     switch (page) {
-      case 'ListNote':
-        return <ListNote notes={notes} />
+      case 'ListNotes':
+        return <ListNotes notes={notes} />
       case 'AddNote':
-        return <AddNote setNote={(t: INote[]) => handleAddNote(t)} notes={notes} />
+        return <AddNote setNotes={(n: INote[]) => handleAddNote(n)} notes={notes} />
       case 'AddReminder':
         return <AddReminder setReminders={(r: IReminder[]) => handleAddReminders(r)} reminders={reminders} />
-      case 'ListReminder':
-        return <ListReminder reminders={reminders} />
+      case 'ListReminders':
+        return <ListReminders reminders={reminders} />
+      case 'ListTasklists':
+        return <ListTasklists tasklists={tasklists} />
+      case 'AddTasklist':
+        return <AddTasklist setTasklists={(t: ITasklist[]) => handleAddTasklist(t)} tasklists={tasklists} />
       case 'Settings':
         return <Settings setSettings={(settings: ISettings) => setSettings(settings)} settings={settings} />
     }
@@ -73,12 +84,11 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
     <S.Container>
       <Header profileImage={userData.image} logout={handleLogout}></Header>
       <S.Main
-      bounces={page === 'Settings' ? false : true}
+        bounces={page === 'Settings' ? false : true}
       >
         {renderContent(page)}
       </S.Main>
       <Menu setPage={(e: string) => setPage(e)} page={page}></Menu>
     </S.Container>
-  )
-    ;
+  );
 }

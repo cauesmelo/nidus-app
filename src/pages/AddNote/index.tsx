@@ -4,7 +4,7 @@ import { Input } from '../../components/Forms/Input';
 import * as G from '../../global/styles/global';
 import { INote } from '../../global/types';
 
-export const AddNote = ({ setNote, notes }: { setNote: (notes: INote[]) => void, notes: INote[] }) => {
+export const AddNote = ({ setNotes, notes }: { setNotes: (notes: INote[]) => void, notes: INote[] }) => {
 
   const [text, setText] = useState('');
 
@@ -17,7 +17,7 @@ export const AddNote = ({ setNote, notes }: { setNote: (notes: INote[]) => void,
 
     newArrayOfNotes.push(newNote);
 
-    setNote(newArrayOfNotes);
+    setNotes(newArrayOfNotes);
   }
 
   const handleGetText = (text: string) => {

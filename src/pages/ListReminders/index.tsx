@@ -3,22 +3,24 @@ import { Text } from 'react-native';
 import uuid from 'react-native-uuid';
 import * as G from '../../global/styles/global';
 import * as S from './styles';
-import { INote } from '../../global/types';
+import { IReminder } from '../../global/types';
 
-export const ListNote = ({ notes }: { notes: INote[] }) => {
 
+export const ListReminders = ({ reminders }: { reminders: IReminder[] }) => {
 
   return (
     <G.Container>
       <G.MainContainer>
         <G.Main>
-          <G.Title>Notas criadas</G.Title>
+          <G.Title>Lembretes</G.Title>
           {
-            notes.length > 0 ?
-              notes.map((n: INote) => {
+            reminders.length > 0 ?
+              reminders.map((r: IReminder) => {
                 const key = uuid.v4().toString();
                 return (
-                  <S.CardNote key={key}>{n.text}</S.CardNote>
+                  <S.CardReminder key={key}>
+                    <Text>{r.text} - {r.date.toString()}</Text>
+                  </S.CardReminder>
                 )
               })
               :
