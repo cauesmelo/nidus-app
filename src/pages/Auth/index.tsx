@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import Auth0 from 'react-native-auth0';
 import * as AuthSession from 'expo-auth-session';
-import { DOMAIN, CLIENT_ID } from 'react-native-dotenv';
 import { Alert } from 'react-native';
-const auth0 = new Auth0({ domain: DOMAIN, clientId: CLIENT_ID });
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect } from 'react';
 
 import * as S from './styles';
 import * as G from '../../global/styles/global';
 import { IUserData } from '../../global/types';
+import * as api from '../../utils/api';
 
 interface AuthProps {
   navigation: any;
@@ -51,7 +49,6 @@ const mockedUser: IUserData = {
 }
 
 const redirect = AuthSession.makeRedirectUri();
-const requestTokenURL = 'http://0.0.0.0:8080/user/request-token';
 const accessTokenURL = 'http://0.0.0.0:8080/user/access-token';
 
 export const Auth = ({ navigation }: AuthProps) => {
@@ -73,52 +70,32 @@ export const Auth = ({ navigation }: AuthProps) => {
     loadLocalData();
   }, []);
 
-  // TODO: Type this function
-  // @ts-ignore
-  const toQueryString = (params) => {
-    return (
-      '?' +
-      Object.entries(params)
-        .map(
-          ([key, value]) =>
-            // @ts-ignore
-            `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
-        )
-        .join('&')
-    );
-  }
-
   const handleTwitterLogin = async () => {
     setIsLoading(true);
     try {
-      const requestParams = toQueryString({ callback_url: redirect });
-      const requestTokens = await fetch(
-        requestTokenURL + requestParams
-      ).then((res) => res.json());
-
+      const requestTokens = await api.getRequestTokens(redirect);
       setIsLoading(false);
 
       const authResponse = await AuthSession.startAsync({
         authUrl:
           'https://api.twitter.com/oauth/authenticate' +
-          toQueryString(requestTokens),
+          api.toQueryString(requestTokens),
       }) as AuthResult;
 
       if (authResponse.params && authResponse.params.denied) {
         Alert.alert('Autorização não concedida. Para utilizar aplicativo é necessário autorizar.');
         setIsLoading(false);
       }
-
       setIsLoading(true);
 
-      const accessParams = toQueryString({
-        oauth_token: requestTokens.oauth_token,
-        oauth_token_secret: requestTokens.oauth_token_secret,
-        oauth_verifier: authResponse.params.oauth_verifier,
-      });
-      const { userData, session } = await fetch(
-        accessTokenURL + accessParams
-      ).then((res) => res.json());
+      const { userData, session } = await api.getAcessParams(
+        requestTokens.oauth_token, 
+        requestTokens.oauth_token_secret, 
+        authResponse.params.oauth_verifier
+      )
+
+      console.log(userData);
+      console.log(session);
 
       await AsyncStorage.setItem('@nidus:userData', JSON.stringify(userData));
       await AsyncStorage.setItem('@nidus:session', JSON.stringify(session));
