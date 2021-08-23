@@ -2,6 +2,7 @@
   "name": "nidusapp",
   "displayName": "nidus-app",
   "expo": {
+    "scheme": "nidus",
     "name": "nidus-app",
     "slug": "nidus-app",
     "version": "1.0.0",

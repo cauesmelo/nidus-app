@@ -58,3 +58,14 @@ export interface ICredentials {
   scope: string;
   tokenType: string;
 }
+
+export interface IResponseUserData {
+  created_at: Date;
+  id: string
+  tw_id: string
+  tw_name: string
+  tw_access_token: string
+  tw_access_token_verifier: string
+  tw_profile_picture: string
+  tw_email: string
+}
