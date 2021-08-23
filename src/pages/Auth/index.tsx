@@ -6,8 +6,8 @@ import { useEffect } from 'react';
 
 import * as S from './styles';
 import * as G from '../../global/styles/global';
-import { IUserData } from '../../global/types';
-import * as api from '../../utils/api';
+import { IUserData, IResponseUserData } from '../../global/types';
+import api, { getUser, getAccessTokens, getRequestTokens, getSettings, toQueryString, setToken } from '../../utils/api';
 
 interface AuthProps {
   navigation: any;
@@ -23,10 +23,6 @@ interface AuthResult {
   authentication: AuthSession.TokenResponse | null;
   url: string;
 }
-
-// DEBUG MODES
-const devMockData = false;
-const devforceAuth = true;
 
 const mockedUser: IUserData = {
   accountId: '1b0c65b4-b5b0-43d3-9070-f5b712d32b78',
@@ -49,20 +45,22 @@ const mockedUser: IUserData = {
 }
 
 const redirect = AuthSession.makeRedirectUri();
-const accessTokenURL = 'http://0.0.0.0:8080/user/access-token';
 
 export const Auth = ({ navigation }: AuthProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const loadLocalData = async () => {
-    let user;
-    if (devMockData) user = JSON.stringify(mockedUser);
-    else if (!devforceAuth) user = await AsyncStorage.getItem('@nidus:userData')
-    if (user) {
-      navigation.navigate("Dashboard", JSON.parse(user));
-    }
+    const user = await AsyncStorage.getItem('@nidus:userData');
+    const session = await AsyncStorage.getItem('@nidus:session');
+    const notes = await AsyncStorage.getItem('@nidus:notes');
+    const tasklists = await AsyncStorage.getItem('@nidus:tasklists');
+    const reminders = await AsyncStorage.getItem('@nidus:reminders');
 
-    await AsyncStorage.removeItem('@nidus:userData')
+    // if (user) {
+    //   navigation.navigate("Dashboard", JSON.parse(user));
+    // }
+
+    // await AsyncStorage.removeItem('@nidus:userData')
     setIsLoading(false);
   }
 
@@ -72,14 +70,21 @@ export const Auth = ({ navigation }: AuthProps) => {
 
   const handleTwitterLogin = async () => {
     setIsLoading(true);
+
+    await AsyncStorage.removeItem('@nidus:userData');
+    await AsyncStorage.removeItem('@nidus:session');
+    await AsyncStorage.removeItem('@nidus:notes');
+    await AsyncStorage.removeItem('@nidus:tasklists');
+    await AsyncStorage.removeItem('@nidus:reminders');
+
     try {
-      const requestTokens = await api.getRequestTokens(redirect);
+      const requestTokens = await getRequestTokens(redirect);
       setIsLoading(false);
 
       const authResponse = await AuthSession.startAsync({
         authUrl:
           'https://api.twitter.com/oauth/authenticate' +
-          api.toQueryString(requestTokens),
+          toQueryString(requestTokens),
       }) as AuthResult;
 
       if (authResponse.params && authResponse.params.denied) {
@@ -88,43 +93,26 @@ export const Auth = ({ navigation }: AuthProps) => {
       }
       setIsLoading(true);
 
-      const { userData, session } = await api.getAcessParams(
-        requestTokens.oauth_token, 
-        requestTokens.oauth_token_secret, 
-        authResponse.params.oauth_verifier
-      )
+      const { user_id: userId, session }:
+        { user_id: string, session: any }
+        = await getAccessTokens(
+          requestTokens.oauth_token,
+          requestTokens.oauth_token_secret,
+          authResponse.params.oauth_verifier
+        );
 
-      console.log(userData);
-      console.log(session);
-
-      await AsyncStorage.setItem('@nidus:userData', JSON.stringify(userData));
+      setToken(session.access_token);
       await AsyncStorage.setItem('@nidus:session', JSON.stringify(session));
 
+      let userData = await getUser(userId);
+
+      console.log(userData);
       // loadSettings
+      // const settings = getSettings(userData.id);
+      // console.log(settings);
       // loadNotes
       // loadReminders
       // loadTasklists
-
-      const user = {
-        accountId: userData.id,
-        image: userData,
-        settings: {
-          tweetNote: true,
-          tweetReminder: true,
-          tweetTasklist: true,
-          notifyEmail: true,
-          notifyPush: true
-        },
-        twitterToken: 'placeholder',
-        twitterSecret: 'placeholder',
-        twitterNick: 'caucaudev',
-        email: 'cauesmelo@gmail.com',
-        createdAt: new Date(Date.now()),
-        notes: [],
-        reminders: [],
-        tasklists: []
-      } as IUserData;
-
 
     } catch (err) {
       console.log('Server error:');
@@ -132,6 +120,19 @@ export const Auth = ({ navigation }: AuthProps) => {
       setIsLoading(false);
       Alert.alert('Ocorreu um erro. Tente mais tarde novamente.');
     }
+  }
+
+  const test = async () => {
+    const userId = await AsyncStorage.getItem('@nidus:userId').then(r => r && JSON.parse(r));
+    const session= await AsyncStorage.getItem('@nidus:session').then(r => r && JSON.parse(r));
+
+    setToken(session.access_token);
+
+    let userData;
+    if (userId && session) {
+      userData = await getUser(userId)
+    }
+    console.log(userData);
   }
 
   return (<S.Container>
@@ -146,7 +147,7 @@ export const Auth = ({ navigation }: AuthProps) => {
       <>
         <G.LargeTitle>Registros pessoais de forma simples.</G.LargeTitle>
         <G.Title1>Para prosseguir é necessário autenticar com o Twitter</G.Title1>
-        <S.TwitterButton onPress={() => handleTwitterLogin()}>
+        <S.TwitterButton onPress={() => test()}>
           <S.TwitterButtonLogo source={require('../../../assets/twitter.png')} />
           <S.TwitterButtonText>Entrar com Twitter</S.TwitterButtonText>
         </S.TwitterButton>

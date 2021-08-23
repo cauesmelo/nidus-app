@@ -69,3 +69,10 @@ export interface IResponseUserData {
   tw_profile_picture: string
   tw_email: string
 }
+
+export interface ISessionData {
+  access_token: string;
+  active: boolean;
+  id: string;
+  user_id: string;
+}
