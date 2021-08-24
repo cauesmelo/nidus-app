@@ -1,60 +1,35 @@
 import React, { useState } from 'react';
-
+import { getSettings, setSettings as setSettingsAPI, setToken } from '../../utils/api';
 import * as S from './styles';
 import * as G from '../../global/styles/global';
 import { useEffect } from 'react';
+import { ISettings, ISession } from '../../global/types';
 
-interface Settings {
-  tweetNote: boolean;
-  tweetReminder: boolean;
-  tweetTasklist: boolean;
-  notifyEmail: boolean;
-  notifyPush: boolean;
-}
+export const Settings = ({ settings, setSettings, session }:
+  { settings: ISettings, setSettings: (newSettings: ISettings) => void, session: ISession }) => {
+  setToken(session.access_token);
 
-export const Settings = ({ settings, setSettings }: { settings: Settings, setSettings: (newSettings: Settings) => void }) => {
+  const loadSettings = async () => {
+    setSettings(await getSettings(settings.user_id));
+  }
 
-  const [notifyEmail, setNotifyEmail] = useState(settings.notifyEmail);
-  const [notifyPush, setNotifyPush] = useState(settings.notifyPush);
-  const [tweetNote, setTweetNote] = useState(settings.tweetNote);
-  const [tweetReminder, setTweetReminder] = useState(settings.tweetReminder);
-  const [tweetTasklist, setTweetTasklist] = useState(settings.tweetTasklist);
-
-  const toggleSwitch = (input: string) => {
-    switch (input) {
-      case 'email':
-        setNotifyEmail(!notifyEmail);
-        break;
-      case 'push':
-        setNotifyPush(!notifyPush);
-        break;
-      case 'note':
-        setTweetNote(!tweetNote);
-        break;
-      case 'reminder':
-        setTweetReminder(!tweetReminder);
-        break;
-      case 'tasklist':
-        setTweetTasklist(!tweetTasklist);
-        break;
-    }
+  const toggleSwitch = async (input: string) => {
+        // @ts-ignore
+        setSettings((prevState) => {
+          return {
+            ...prevState,
+            [input]: !prevState[input]
+          }
+        });
   }
 
   useEffect(() => {
-    setSettings({
-      tweetNote,
-      tweetReminder,
-      tweetTasklist,
-      notifyEmail,
-      notifyPush,
-    });
+    setSettingsAPI(settings)
+  }, [settings])
 
-    // TODO: SAVE SETTINGS IN API
-  }, [tweetNote,
-    tweetReminder,
-    tweetTasklist,
-    notifyEmail,
-    notifyPush])
+  useEffect(() => {
+    loadSettings();
+  }, [])
 
   return (
     <G.Container>
@@ -69,7 +44,7 @@ export const Settings = ({ settings, setSettings }: { settings: Settings, setSet
             </S.SettingTitle>
             <S.SettingHandle
               onValueChange={() => toggleSwitch('email')}
-              value={notifyEmail}
+              value={settings.email}
             />
           </S.Setting>
 
@@ -79,7 +54,7 @@ export const Settings = ({ settings, setSettings }: { settings: Settings, setSet
             </S.SettingTitle>
             <S.SettingHandle
               onValueChange={() => toggleSwitch('push')}
-              value={notifyPush}
+              value={settings.push}
             />
           </S.Setting>
 
@@ -90,7 +65,7 @@ export const Settings = ({ settings, setSettings }: { settings: Settings, setSet
             </S.SettingTitle>
             <S.SettingHandle
               onValueChange={() => toggleSwitch('note')}
-              value={tweetNote}
+              value={settings.note}
             />
           </S.Setting>
 
@@ -99,8 +74,8 @@ export const Settings = ({ settings, setSettings }: { settings: Settings, setSet
               Sincronizar listas de tarefas
             </S.SettingTitle>
             <S.SettingHandle
-              onValueChange={() => toggleSwitch('tasklist')}
-              value={tweetTasklist}
+              onValueChange={() => toggleSwitch('task')}
+              value={settings.task}
             />
           </S.Setting>
 
@@ -110,7 +85,7 @@ export const Settings = ({ settings, setSettings }: { settings: Settings, setSet
             </S.SettingTitle>
             <S.SettingHandle
               onValueChange={() => toggleSwitch('reminder')}
-              value={tweetReminder}
+              value={settings.reminder}
             />
           </S.Setting>
 

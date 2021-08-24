@@ -1,3 +1,4 @@
+import { ISettings, IUserData } from './../global/types';
 import axios from 'axios';
 
 const api = axios.create({
@@ -50,29 +51,11 @@ export const getAccessTokens = async (oauth_token: string,
   }
 }
 
-export const getSettings = async (user_id: string) => {
-  try {
-    const resp = await api({
-      method: 'GET',
-      url: '/settings',
-      params: {
-        user_id: user_id
-      },
-      headers: {
-        auth: `Bearer ${token}`
-      }
-    })
-    return resp.data
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 export const setToken = (access_token: string) => {
   api.defaults.headers.authorization = `Bearer ${access_token}`;
 }
 
-export const getUser = async (user_id: string) => {
+export const getUser = async (user_id: string): Promise<IUserData | undefined> => {
   try {
     const resp = await api.get('/user/', {
       params:
@@ -81,6 +64,29 @@ export const getUser = async (user_id: string) => {
       }
     })
     return resp.data
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const setSettings = async (settings: ISettings) => {
+  try {
+    const resp = await api.put('/settings/', { ...settings  })
+    return resp.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const getSettings = async (user_id: string) => {
+  try {
+    const resp = await api.get('/settings/', {
+      params:
+      {
+        user_id: user_id,
+      }
+    })
+    return resp.data;
   } catch (err) {
     console.log(err);
   }
