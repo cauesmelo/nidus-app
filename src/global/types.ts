@@ -1,78 +1,74 @@
 export interface INote {
-  text: string;
-  nextNote?: INote;
+  id: string;
+  tweet_id: string;
+  user_id: string;
+  content: string;
+  created_at: Date;
 }
 
 export interface IReminder {
-  text: string;
+  id: string;
+  tweet_id: string;
+  user_id: string;
+  content: string;
   date: Date;
+  created_at: Date;
 }
 
 export interface ITask {
-  text: string;
-  completed: boolean;
+  id: string;
+  tasklist_id: string;
+  content: string;
 }
 
 export interface ITasklist {
-  text: string;
-  complete: boolean;
+  id: string;
+  tweet_id: string;
+  user_id: string;
+  content: string;
   tasks: ITask[];
+  created_at: Date;
 }
 
 export interface ISettings {
-  tweetNote: boolean;
-  tweetReminder: boolean;
-  tweetTasklist: boolean;
-  notifyEmail: boolean;
-  notifyPush: boolean;
-}
-
-export interface IUser {
-  accountId: string;
-  image: string;
-  twitterToken: string;
-  twitterSecret: string;
-  twitterNick: string;
-  email: string;
-  createdAt: Date;
+  id: string;
+  user_id: string;
+  note: boolean;
+  task: boolean;
+  reminder: boolean;
+  email: boolean;
+  push: boolean;
 }
 
 export interface IUserData {
-  accountId: string;
-  image: string;
-  settings: ISettings;
-  twitterToken: string;
-  twitterSecret: string;
-  twitterNick: string;
-  email: string;
-  createdAt: Date;
+  id: string;
+  tw_profile_picture: string;
+  tw_access_token: string;
+  tw_access_token_verifier: string;
+  tw_name: string;
+  tw_email: string;
+  tw_id: string;
+  created_at: Date;
+  settings: ISettings[];
   notes: INote[];
   reminders: IReminder[];
   tasklists: ITasklist[];
+  session: ISession[];
 }
 
-export interface ICredentials {
-  accessToken: string;
-  expiresIn: number;
-  idToken: string;
-  scope: string;
-  tokenType: string;
+export interface IUser {
+  id: string;
+  tw_profile_picture: string;
+  tw_access_token: string;
+  tw_access_token_verifier: string;
+  tw_name: string;
+  tw_email: string;
+  tw_id: string;
 }
 
-export interface IResponseUserData {
-  created_at: Date;
-  id: string
-  tw_id: string
-  tw_name: string
-  tw_access_token: string
-  tw_access_token_verifier: string
-  tw_profile_picture: string
-  tw_email: string
-}
-
-export interface ISessionData {
-  access_token: string;
-  active: boolean;
+export interface ISession {
   id: string;
   user_id: string;
+  access_token: string;
+  active: boolean;
 }
