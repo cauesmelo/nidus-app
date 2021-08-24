@@ -1,7 +1,8 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import { Header } from '../../components/Header';
 import { Menu } from '../../components/Menu';
-import { IUser, IUserData, ISettings, INote, IReminder, ITasklist } from '../../global/types';
+import { IUser, IUserData, ISettings, INote, IReminder, ITasklist, ISession } from '../../global/types';
 import { AddNote } from '../AddNote';
 import { AddReminder } from '../AddReminder';
 import { AddTasklist } from '../AddTasklist';
@@ -23,23 +24,25 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
   const [notes, setNotes] = useState<INote[]>([]);
   const [reminders, setReminders] = useState<IReminder[]>([]);
   const [tasklists, setTasklists] = useState<ITasklist[]>([]);
+  const [session, setSession] = useState<ISession>({} as ISession);
 
   const userData: IUserData = route.params;
 
   useEffect(() => {
-    setSettings(userData.settings);
+    setSettings(userData.settings[0]);
     setUser({
-      accountId: userData.accountId,
-      image: userData.image,
-      twitterToken: userData.twitterToken,
-      twitterSecret: userData.twitterSecret,
-      twitterNick: userData.twitterNick,
-      email: userData.email,
-      createdAt: userData.createdAt,
+      id: userData.id,
+      tw_profile_picture: userData.tw_profile_picture,
+      tw_access_token: userData.tw_access_token,
+      tw_access_token_verifier: userData.tw_access_token_verifier,
+      tw_name: userData.tw_name,
+      tw_email: userData.tw_email,
+      tw_id: userData.tw_id,
     });
     setNotes(userData.notes);
     setReminders(userData.reminders);
     setTasklists(userData.tasklists);
+    setSession(userData.session[0]);
   }, []);
 
   const handleAddNote = (newNote: INote[]) => {
@@ -58,6 +61,7 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
   }
 
   const handleLogout = async () => {
+    await AsyncStorage.removeItem('@nidus:userData');
     navigation.navigate("Auth");
   }
   // GAMBIARROU BB 🤫
@@ -76,13 +80,17 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
       case 'AddTasklist':
         return <AddTasklist setTasklists={(t: ITasklist[]) => handleAddTasklist(t)} tasklists={tasklists} />
       case 'Settings':
-        return <Settings setSettings={(settings: ISettings) => setSettings(settings)} settings={settings} />
+        return <Settings 
+        setSettings={(settings: ISettings) => setSettings(settings)} 
+        settings={settings} 
+        session={session}
+        />
     }
   }
 
   return (
     <S.Container>
-      <Header profileImage={userData.image} logout={handleLogout}></Header>
+      <Header profileImage={user.tw_profile_picture} logout={handleLogout}></Header>
       <S.Main
         bounces={page === 'Settings' ? false : true}
       >
