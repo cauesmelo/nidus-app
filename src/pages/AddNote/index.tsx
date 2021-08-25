@@ -19,6 +19,7 @@ export const AddNote = ({ setNotes, notes, session }:
     setLoading(true);
     try {
       const newNote = await postNote(text);
+      if(!newNote) throw new Error('Erro ao processar nota, verifique o servidor.')
       // @ts-ignore
       setNotes(prevState => ([...prevState, newNote]))
     } catch (err) {

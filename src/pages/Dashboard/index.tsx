@@ -104,7 +104,7 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
     <S.Container>
       <Header profileImage={user.tw_profile_picture} logout={handleLogout}></Header>
       <S.Main
-        bounces={page === 'Settings' ? false : true}
+        bounces={page === 'Settings' || page.includes('Add') ? false : true}
       >
         {renderContent(page)}
       </S.Main>
