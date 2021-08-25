@@ -14,7 +14,7 @@ export const ListNotes = ({ notes }: { notes: INote[] }) => {
           <G.Title>Notas</G.Title>
           {
             notes.length > 0 ?
-              notes.map((n: INote) => {
+              notes.slice(0).reverse().map((n: INote) => {
                 const key = uuid.v4().toString();
                 return (
                   <S.CardNote key={key}>{n.content}</S.CardNote>

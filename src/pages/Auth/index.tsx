@@ -30,12 +30,19 @@ export const Auth = ({ navigation }: AuthProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const loadLocalData = async () => {
+    setIsLoading(true);
     const userData = await AsyncStorage.getItem('@nidus:userData');
-
     if (userData) {
-      navigation.navigate("Dashboard", JSON.parse(userData));
+      const userSaved = JSON.parse(userData);
+      setHeader(userSaved.session[0].access_token, userSaved.id);
+      const user = await getUser(userSaved.id);
+      if(user) {
+      await AsyncStorage.setItem('@nidus:userData', JSON.stringify(user));
+      navigation.navigate("Dashboard", user);
+      } else {
+        AsyncStorage.clear();
+      }
     }
-
     setIsLoading(false);
   }
 
@@ -75,11 +82,11 @@ export const Auth = ({ navigation }: AuthProps) => {
 
       let userData = await getUser(userId);
 
-      if(userData) {
+      if (userData) {
         await AsyncStorage.setItem('@nidus:userData', JSON.stringify(userData));
         navigation.navigate("Dashboard", userData);
       } else throw Error('No response');
-      
+
     } catch (err) {
       console.log('Server error:');
       console.log(err);

@@ -27,12 +27,6 @@ export const AddNote = ({ setNotes, notes, session }:
       setLoading(false);
       Alert.alert('Ocorreu um erro. Tente mais tarde novamente.');
     }
-
-    // Criar nota na api
-    // Api retorna nova nota
-    // Salva nova nota localmente
-
-    // setNotes(prevState =>);
   }
 
   const handleGetText = (text: string) => {

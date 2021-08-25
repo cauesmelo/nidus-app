@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect, useState, useContext } from 'react';
-import { ThemeContext } from 'styled-components/native';
+import React, { useEffect, useState } from 'react';
 import { Header } from '../../components/Header';
 import { Menu } from '../../components/Menu';
 import { IUser, IUserData, ISettings, INote, IReminder, ITasklist, ISession } from '../../global/types';
