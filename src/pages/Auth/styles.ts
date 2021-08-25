@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import { ActivityIndicator } from 'react-native';
 
 export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.secondary};
@@ -39,8 +38,4 @@ export const TwitterButtonText = styled.Text`
 font-family: ${({theme}) => theme.fonts.semiBold};
   color: ${({ theme }) => theme.colors.secondary};
   font-size: 15px;
-`;
-
-export const Loading = styled(ActivityIndicator)`
-  margin-top: 50px;
 `;

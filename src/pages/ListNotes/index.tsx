@@ -7,7 +7,6 @@ import { INote } from '../../global/types';
 
 export const ListNotes = ({ notes }: { notes: INote[] }) => {
 
-
   return (
     <G.Container>
       <G.MainContainer>
@@ -18,7 +17,7 @@ export const ListNotes = ({ notes }: { notes: INote[] }) => {
               notes.map((n: INote) => {
                 const key = uuid.v4().toString();
                 return (
-                  <S.CardNote key={key}>{n.text}</S.CardNote>
+                  <S.CardNote key={key}>{n.content}</S.CardNote>
                 )
               })
               :

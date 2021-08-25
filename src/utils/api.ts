@@ -51,8 +51,9 @@ export const getAccessTokens = async (oauth_token: string,
   }
 }
 
-export const setToken = (access_token: string) => {
+export const setHeader = (access_token: string, user_id: string) => {
   api.defaults.headers.authorization = `Bearer ${access_token}`;
+  api.defaults.headers.user_id = user_id;
 }
 
 export const getUser = async (user_id: string): Promise<IUserData | undefined> => {
@@ -78,7 +79,7 @@ export const setSettings = async (settings: ISettings) => {
   }
 }
 
-export const getSettings = async (user_id: string) => {
+export const getSettings = async(user_id: string) => {
   try {
     const resp = await api.get('/settings/', {
       params:
@@ -86,6 +87,15 @@ export const getSettings = async (user_id: string) => {
         user_id: user_id,
       }
     })
+    return resp.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const postNote = async(content: string) => {
+  try {
+    const resp = await api.post('/notes/', { content })
     return resp.data;
   } catch (err) {
     console.log(err);

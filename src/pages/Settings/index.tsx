@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getSettings, setSettings as setSettingsAPI, setToken } from '../../utils/api';
+import { getSettings, setSettings as setSettingsAPI, setHeader } from '../../utils/api';
 import * as S from './styles';
 import * as G from '../../global/styles/global';
 import { useEffect } from 'react';
@@ -7,20 +7,20 @@ import { ISettings, ISession } from '../../global/types';
 
 export const Settings = ({ settings, setSettings, session }:
   { settings: ISettings, setSettings: (newSettings: ISettings) => void, session: ISession }) => {
-  setToken(session.access_token);
+    setHeader(session.access_token, session.user_id);
 
   const loadSettings = async () => {
     setSettings(await getSettings(settings.user_id));
   }
 
   const toggleSwitch = async (input: string) => {
-        // @ts-ignore
-        setSettings((prevState) => {
-          return {
-            ...prevState,
-            [input]: !prevState[input]
-          }
-        });
+    // @ts-ignore
+    setSettings((prevState) => {
+      return {
+        ...prevState,
+        [input]: !prevState[input]
+      }
+    });
   }
 
   useEffect(() => {

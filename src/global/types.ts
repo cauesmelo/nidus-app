@@ -64,6 +64,7 @@ export interface IUser {
   tw_name: string;
   tw_email: string;
   tw_id: string;
+  created_at: Date;
 }
 
 export interface ISession {

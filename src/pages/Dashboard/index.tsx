@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { ThemeContext } from 'styled-components/native';
 import { Header } from '../../components/Header';
 import { Menu } from '../../components/Menu';
 import { IUser, IUserData, ISettings, INote, IReminder, ITasklist, ISession } from '../../global/types';
@@ -28,6 +29,17 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
 
   const userData: IUserData = route.params;
 
+  const saveData = async (userData: IUserData) => {
+    await AsyncStorage.setItem('@nidus:userData', JSON.stringify(userData));
+  }
+
+  useEffect(() => {
+    saveData({
+      ...user,
+      notes, reminders, tasklists, settings: [settings], session: [session]
+    })
+  }, [notes, reminders, tasklists, settings])
+
   useEffect(() => {
     setSettings(userData.settings[0]);
     setUser({
@@ -38,6 +50,7 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
       tw_name: userData.tw_name,
       tw_email: userData.tw_email,
       tw_id: userData.tw_id,
+      created_at: userData.created_at
     });
     setNotes(userData.notes);
     setReminders(userData.reminders);
@@ -47,12 +60,12 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
 
   const handleAddNote = (newNote: INote[]) => {
     setNotes(newNote);
-    setPage('ListNote');
+    setPage('ListNotes');
   }
 
   const handleAddReminders = (newReminders: IReminder[]) => {
     setReminders(newReminders);
-    setPage('ListReminder');
+    setPage('ListReminders');
   }
 
   const handleAddTasklist = (newTasklists: ITasklist[]) => {
@@ -70,7 +83,7 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
       case 'ListNotes':
         return <ListNotes notes={notes} />
       case 'AddNote':
-        return <AddNote setNotes={(n: INote[]) => handleAddNote(n)} notes={notes} />
+        return <AddNote setNotes={(n: INote[]) => handleAddNote(n)} notes={notes} session={session} />
       case 'AddReminder':
         return <AddReminder setReminders={(r: IReminder[]) => handleAddReminders(r)} reminders={reminders} />
       case 'ListReminders':
@@ -80,10 +93,10 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
       case 'AddTasklist':
         return <AddTasklist setTasklists={(t: ITasklist[]) => handleAddTasklist(t)} tasklists={tasklists} />
       case 'Settings':
-        return <Settings 
-        setSettings={(settings: ISettings) => setSettings(settings)} 
-        settings={settings} 
-        session={session}
+        return <Settings
+          setSettings={(settings: ISettings) => setSettings(settings)}
+          settings={settings}
+          session={session}
         />
     }
   }

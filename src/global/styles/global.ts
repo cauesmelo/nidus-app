@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { ActivityIndicator } from 'react-native';
 
 export const Title = styled.Text`
   font-size: 30px;
@@ -36,4 +37,8 @@ height: 100%;
 export const MainContainer = styled.View`
 flex: 1;
 margin: 0px;
+`;
+
+export const Loading = styled(ActivityIndicator)`
+  margin-top: 50px;
 `;

@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 
 import * as S from './styles';
 import * as G from '../../global/styles/global';
-import { getUser, getAccessTokens, getRequestTokens, toQueryString, setToken } from '../../utils/api';
+import { getUser, getAccessTokens, getRequestTokens, toQueryString, setHeader } from '../../utils/api';
 
 interface AuthProps {
   navigation: any;
@@ -70,12 +70,10 @@ export const Auth = ({ navigation }: AuthProps) => {
           authResponse.params.oauth_verifier
         );
 
-      setToken(session.access_token);
+      setHeader(session.access_token, session.user_id);
       await AsyncStorage.setItem('@nidus:session', JSON.stringify(session));
 
       let userData = await getUser(userId);
-
-      console.log(userData);
 
       if(userData) {
         await AsyncStorage.setItem('@nidus:userData', JSON.stringify(userData));
@@ -95,7 +93,7 @@ export const Auth = ({ navigation }: AuthProps) => {
 
     {isLoading ? (
       <>
-        <S.Loading size="large" />
+        <G.Loading size="large" />
       </>
     ) : (
       <>
