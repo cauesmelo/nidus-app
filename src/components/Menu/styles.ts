@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { Entypo } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 
-interface ContainerAddProps {
+interface PageProps {
   page: string;
 }
 
@@ -40,21 +40,18 @@ export const ButtonClock = styled(Button)<ButtonProps>`
    ? '80px' : '0px'};
   background-color:
   ${props => (props.page == 'ListReminders')
-  || (props.page == 'AddReminder')
    ? ({ theme }) => theme.colors.alternativeLight : 'white'};
 `;
 
 export const ButtonDiary = styled(Button)<ButtonProps>`
   background-color:
   ${props => (props.page == 'ListNotes')
-  || (props.page == 'AddNote')
    ? ({ theme }) => theme.colors.alternativeLight : 'white'};
 `;
 
 export const ButtonList = styled(Button)<ButtonProps>`
   background-color:
   ${props => (props.page == 'ListTasklists')
-  || (props.page == 'AddTasklist')
    ? ({ theme }) => theme.colors.alternativeLight : 'white'};
 `;
 
@@ -74,7 +71,7 @@ color:${({ theme }) => theme.colors.primary};
 font-size: ${iconSize};
 `;
 
-export const ContainerAdd = styled.View<ContainerAddProps>`
+export const ContainerAdd = styled.View<PageProps>`
 display: ${props => props.page === 'Settings' ? "none" : "flex"};
 padding: 10px;
 border-radius:35px;
@@ -84,21 +81,25 @@ position: absolute;
 background-color: ${({ theme }) => theme.colors.alternativeLight};
 `;
 
-export const AddBackground = styled.View`
-background-color: ${({ theme }) => theme.colors.secondary};
+export const AddBackground = styled.View<PageProps>`
 border-radius: 25px;
+background-color: ${
+props => props.page.includes('Add') ? ({ theme }) => theme.colors.primary 
+: ({ theme }) => theme.colors.secondary
+};
 `;
 
-export const Add = styled(Entypo)`
-color:${({ theme }) => theme.colors.primary};
+export const Add = styled(Entypo)<PageProps>`
+color: ${props => props.page.includes('Add') ? ({ theme }) => theme.colors.secondary 
+: ({ theme }) => theme.colors.primary};
 font-size: 40px;
 padding:10px;
 `;
-export const Clock = styled(Entypo)`
-color:${({ theme }) => theme.colors.primary};
+export const Clock = styled(Entypo)<PageProps>`
+color: ${({ theme }) => theme.colors.primary};
 font-size: ${iconSize};
 `;
-export const Settings = styled(Entypo)`
-color:${({ theme }) => theme.colors.primary};
+export const Settings = styled(Entypo)<PageProps>`
+color: ${({ theme }) => theme.colors.primary};
 font-size: ${iconSize};
 `;
