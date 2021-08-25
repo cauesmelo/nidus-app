@@ -18,7 +18,7 @@ export const AddReminder = ({ setReminders, reminders }: { setReminders: (remind
 
   const handleAddReminder = () => {
     const newReminder = {
-      text: text,
+      content: text,
       date: date
     }
 

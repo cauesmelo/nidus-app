@@ -19,12 +19,12 @@ export const ListReminders = ({ reminders }: { reminders: IReminder[] }) => {
                 const key = uuid.v4().toString();
                 return (
                   <S.CardReminder key={key}>
-                    <Text>{r.text} - {r.date.toString()}</Text>
+                    <Text>{r.content} - {r.date.toString()}</Text>
                   </S.CardReminder>
                 )
               })
               :
-              <Text>Nehuma nota criada</Text>
+              <Text>Nehuma lembrete criado</Text>
           }
         </G.Main>
       </G.MainContainer>

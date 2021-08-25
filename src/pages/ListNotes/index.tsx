@@ -12,6 +12,7 @@ export const ListNotes = ({ notes }: { notes: INote[] }) => {
       <G.MainContainer>
         <G.Main>
           <G.Title>Notas</G.Title>
+          <G.ScrollContainer>
           {
             notes.length > 0 ?
               notes.slice(0).reverse().map((n: INote) => {
@@ -23,6 +24,7 @@ export const ListNotes = ({ notes }: { notes: INote[] }) => {
               :
               <Text>Nehuma nota criada</Text>
           }
+          </G.ScrollContainer>
         </G.Main>
       </G.MainContainer>
     </G.Container>

@@ -45,10 +45,10 @@ export const EndSessionContainer = styled.TouchableOpacity``;
 export const EndSessionButton = styled.View<{ display: string }>`
 display: ${p => p.display};
 opacity: 1;
-border-radius: 10px;
+border-radius: 20px;
 z-index: 99;
 top: 60px;
-left: -30px;
+left: -25px;
 position: absolute;
 border:1px solid ${({ theme }) => theme.colors.alternative};
 width: 100px;

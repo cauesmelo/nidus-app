@@ -1,6 +1,6 @@
 export interface INote {
   id: string;
-  tweet_id: string;
+  tweet_id: string | undefined;
   user_id: string;
   content: string;
   created_at: Date;
@@ -8,7 +8,7 @@ export interface INote {
 
 export interface IReminder {
   id: string;
-  tweet_id: string;
+  tweet_id: string | undefined;
   user_id: string;
   content: string;
   date: Date;
@@ -23,7 +23,7 @@ export interface ITask {
 
 export interface ITasklist {
   id: string;
-  tweet_id: string;
+  tweet_id: string | undefined;
   user_id: string;
   content: string;
   tasks: ITask[];

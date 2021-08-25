@@ -1,11 +1,12 @@
 import styled from 'styled-components/native';
 import { Entypo } from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native';
 
 interface ContainerAddProps {
   page: string;
 }
 
-interface ClockProps {
+interface ButtonProps {
   page: string;
 }
 
@@ -21,12 +22,52 @@ export const Container = styled.View`
   flex-direction:row;
   justify-content: space-around;
   align-items: center;
-  padding:10px 20px 30px;
+  padding:0px 20px 10px;
+`;
+
+export const Button = styled(TouchableOpacity)`
+  background-color: ${({ theme }) => theme.colors.alternativeLight};
+  border-radius: 20px;
+  height: 60px;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  max-width: 60px;
+`;
+
+export const ButtonClock = styled(Button)<ButtonProps>`
+  margin-left: ${props => (props.page !== 'Settings')
+   ? '80px' : '0px'};
+  background-color:
+  ${props => (props.page == 'ListReminders')
+  || (props.page == 'AddReminder')
+   ? ({ theme }) => theme.colors.alternativeLight : 'white'};
+`;
+
+export const ButtonDiary = styled(Button)<ButtonProps>`
+  background-color:
+  ${props => (props.page == 'ListNotes')
+  || (props.page == 'AddNote')
+   ? ({ theme }) => theme.colors.alternativeLight : 'white'};
+`;
+
+export const ButtonList = styled(Button)<ButtonProps>`
+  background-color:
+  ${props => (props.page == 'ListTasklists')
+  || (props.page == 'AddTasklist')
+   ? ({ theme }) => theme.colors.alternativeLight : 'white'};
+`;
+
+export const ButtonSettings = styled(Button)<ButtonProps>`
+  background-color:
+  ${props => (props.page == 'Settings')
+   ? ({ theme }) => theme.colors.alternativeLight : 'white'};
 `;
 
 export const Diary = styled(Entypo)`
   color:${({ theme }) => theme.colors.primary};
   font-size: ${iconSize};
+  padding: 10px;
 `;
 export const Todo = styled(Entypo)`
 color:${({ theme }) => theme.colors.primary};
@@ -38,7 +79,7 @@ display: ${props => props.page === 'Settings' ? "none" : "flex"};
 padding: 10px;
 border-radius:35px;
 top: -40px;
-left: 171px;
+left: 167.5px;
 position: absolute;
 background-color: ${({ theme }) => theme.colors.alternativeLight};
 `;
@@ -53,8 +94,7 @@ color:${({ theme }) => theme.colors.primary};
 font-size: 40px;
 padding:10px;
 `;
-export const Clock = styled(Entypo)<ClockProps>`
-margin-left:${ props => props.page === 'Settings' ? '0px' : '100px'};
+export const Clock = styled(Entypo)`
 color:${({ theme }) => theme.colors.primary};
 font-size: ${iconSize};
 `;

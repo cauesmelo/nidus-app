@@ -37,13 +37,13 @@ export const Menu = ({ setPage, page }: { setPage: (page: string) => void, page:
 
   return (
     <S.Container>
-      <TouchableOpacity onPress={handleNote}>
+      <S.ButtonDiary page={page} onPress={handleNote}>
         <S.Diary name="book"></S.Diary>
-      </TouchableOpacity>
+      </S.ButtonDiary>
 
-      <TouchableOpacity onPress={handleTasklist}>
+      <S.ButtonList page={page} onPress={handleTasklist}>
         <S.Todo name="list"></S.Todo>
-      </TouchableOpacity>
+      </S.ButtonList>
 
       <S.ContainerAdd page={page}>
         <TouchableOpacity>
@@ -53,12 +53,12 @@ export const Menu = ({ setPage, page }: { setPage: (page: string) => void, page:
         </TouchableOpacity>
       </S.ContainerAdd>
 
-      <TouchableOpacity>
-        <S.Clock name="clock" onPress={handleReminder} page={page}></S.Clock>
-      </TouchableOpacity>
+      <S.ButtonClock page={page}>
+        <S.Clock name="clock" onPress={handleReminder}/>
+      </S.ButtonClock>
 
-      <TouchableOpacity>
-        <S.Settings name="cog" onPress={handleSettings}></S.Settings>
-      </TouchableOpacity>
+      <S.ButtonSettings page={page}>
+        <S.Settings name="cog" onPress={handleSettings}/>
+      </S.ButtonSettings>
     </S.Container>);
 }

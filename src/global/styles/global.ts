@@ -42,3 +42,5 @@ margin: 0px;
 export const Loading = styled(ActivityIndicator)`
   margin-top: 50px;
 `;
+
+export const ScrollContainer = styled.ScrollView``;
