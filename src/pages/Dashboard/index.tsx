@@ -88,7 +88,7 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
       case 'ListReminders':
         return <ListReminders reminders={reminders} />
       case 'ListTasklists':
-        return <ListTasklists tasklists={tasklists} />
+        return <ListTasklists tasklists={tasklists} setTasklists={(t: ITasklist[]) => handleAddTasklist(t)} />
       case 'AddTasklist':
         return <AddTasklist setTasklists={(t: ITasklist[]) => handleAddTasklist(t)} tasklists={tasklists} />
       case 'Settings':

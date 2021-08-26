@@ -6,22 +6,26 @@ import * as S from './styles';
 import * as G from '../../global/styles/global';
 import { ITasklist, ITask } from '../../global/types';
 
-export const ListTasklists = ({ tasklists }: { tasklists: ITasklist[] }) => {
+export const ListTasklists = ({ setTasklists, tasklists }: { setTasklists: (tasklists: ITasklist[]) => void, tasklists: ITasklist[] }) => {
+
+  const handleDeleteTask = (id: string) => {
+    setTasklists(tasklists.filter(i => i.id != id));
+  }
   return (
     <G.Container>
       <G.MainContainer>
         <G.Main>
           <G.Title>Listas de tarefas</G.Title>
+          <G.ScrollContainer>
           {
             tasklists.length > 0 ?
               tasklists.slice(0).reverse().map((tasklist: ITasklist) => {
-                const key = uuid.v4().toString();
                 return (
-                  <S.CardTasklist key={key}>
+                  <S.CardTasklist key={tasklist.id}>
                     <S.CardContainerTasklistTitle>
                       <S.CardTasklistTitle>{tasklist.content}</S.CardTasklistTitle>
                       <S.DeleteTasklist>
-                        <S.Delete name="eraser" ></S.Delete>
+                        <S.Delete name="eraser" onPress={() => handleDeleteTask(tasklist.id)}></S.Delete>
                       </S.DeleteTasklist>
                     </S.CardContainerTasklistTitle>
                     {tasklist.tasks.map((task: ITask) => {
@@ -48,6 +52,7 @@ export const ListTasklists = ({ tasklists }: { tasklists: ITasklist[] }) => {
               :
               <Text>Nenhuma lista de tarefa criada</Text>
           }
+          </G.ScrollContainer>
         </G.Main>
       </G.MainContainer>
     </G.Container>

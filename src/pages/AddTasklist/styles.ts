@@ -143,3 +143,6 @@ margin-top: 10px;
 flex: 1;
 flex-direction: row;
 `;
+
+export const ContentContainer = styled.ScrollView`
+`;
