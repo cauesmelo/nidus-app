@@ -84,7 +84,7 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
       case 'AddNote':
         return <AddNote setNotes={(n: INote[]) => handleAddNote(n)} notes={notes} session={session} />
       case 'AddReminder':
-        return <AddReminder setReminders={(r: IReminder[]) => handleAddReminders(r)} reminders={reminders} />
+        return <AddReminder session={session} setReminders={(r: IReminder[]) => handleAddReminders(r)} reminders={reminders} />
       case 'ListReminders':
         return <ListReminders reminders={reminders} />
       case 'ListTasklists':
@@ -103,9 +103,7 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
   return (
     <S.Container>
       <Header profileImage={user.tw_profile_picture} logout={handleLogout}></Header>
-      <S.Main
-        // bounces={page === 'Settings' || page.includes('Add') ? false : true}
-      >
+      <S.Main>
         {renderContent(page)}
       </S.Main>
       <Menu setPage={(e: string) => setPage(e)} page={page}></Menu>

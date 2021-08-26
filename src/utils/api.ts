@@ -102,4 +102,14 @@ export const postNote = async(content: string) => {
   }
 }
 
+export const postReminder = async(content: string, date: Date) => {
+  try {
+    const resp = await api.post('/reminders/', { content, date })
+    console.log(resp.data);
+    return resp.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export default api;

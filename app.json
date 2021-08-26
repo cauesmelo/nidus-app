@@ -1,10 +1,11 @@
 {
-  "name": "nidusapp",
-  "displayName": "nidus-app",
+  "name": "Nidus",
+  "displayName": "Nidus",
   "expo": {
+    "icon": "./assets/icon.png",
     "scheme": "nidus",
-    "name": "nidus-app",
-    "slug": "nidus-app",
+    "name": "Nidus",
+    "slug": "Nidus",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"

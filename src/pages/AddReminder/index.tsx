@@ -4,29 +4,40 @@ import { Input } from '../../components/Forms/Input';
 import { Button } from '../../components/Forms/Button';
 import * as G from '../../global/styles/global';
 import { useEffect } from 'react';
-import { IReminder } from '../../global/types';
+import { IReminder, ISession } from '../../global/types';
+import { postReminder, setHeader } from '../../utils/api';
+import { Alert } from 'react-native';
 
-export const AddReminder = ({ setReminders, reminders }: { setReminders: (reminders: IReminder[]) => void, reminders: IReminder[] }) => {
-
+export const AddReminder = ({ setReminders, reminders, session }:
+  {
+    setReminders: (reminders: IReminder[]) => void,
+    reminders: IReminder[], session: ISession
+  }) => {
+  setHeader(session.access_token, session.user_id);
+  const [loading, setLoading] = useState(false);
   const [text, setText] = useState('');
   const [date, setDate] = useState<Date>(new Date(Date.now()));
+  const [validDate, setValidDate] = useState(false);
 
   const onChange = (event: any, selectedDate: Date) => {
     const currentDate = selectedDate || date;
+    new Date(Date.now()) <= currentDate ? setValidDate(true) : setValidDate(false);
     setDate(currentDate);
   };
 
-  const handleAddReminder = () => {
-    const newReminder = {
-      content: text,
-      date: date
-    }
-
-    const newArrayOfReminders = reminders;
-
-    newArrayOfReminders.push(newReminder);
-
-    setReminders(newArrayOfReminders);
+  const handleAddReminder = async () => {
+      setLoading(true);
+      try {
+        const newReminder = await postReminder(text, date);
+        if (!newReminder) throw new Error('Erro ao processar lembrete, verifique o servidor.')
+        // @ts-ignore
+        setReminders(prevState => ([...prevState, newReminder]))
+      } catch (err) {
+        console.log('Server error:');
+        console.log(err);
+        setLoading(false);
+        Alert.alert('Ocorreu um erro. Tente mais tarde novamente.');
+      }
   }
 
   const handleGetText = (text: string) => {
@@ -34,7 +45,9 @@ export const AddReminder = ({ setReminders, reminders }: { setReminders: (remind
   }
 
   useEffect(() => {
-    setDate(new Date(Date.now()))
+    setDate(new Date(new Date(Date.now())
+      .setMinutes(new Date(Date.now())
+        .getMinutes() + 1)))
   }, []);
 
   return (
@@ -56,7 +69,9 @@ export const AddReminder = ({ setReminders, reminders }: { setReminders: (remind
             // @ts-ignore
             onChange={onChange}
           />
-          <Button title="Inserir lembrete" onPress={handleAddReminder} />
+          <Button title="Inserir lembrete" onPress={handleAddReminder}
+            disabled={!validDate}
+          />
         </G.Main>
       </G.MainContainer>
     </G.Container>

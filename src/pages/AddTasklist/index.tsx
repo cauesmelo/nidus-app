@@ -9,11 +9,11 @@ import { useEffect } from 'react';
 
 export const AddTasklist = ({ setTasklists, tasklists }: { setTasklists: (tasklists: ITasklist[]) => void, tasklists: ITasklist[] }) => {
 
-  const [tasklist, setTasklist] = useState<ITasklist>({
-    text: '',
+  const [tasklist, setTasklist] = useState({
+    content: '',
     complete: false,
     tasks: []
-  } as ITasklist);
+  });
   const [titleActive, setTitleActive] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [addTask, setAddTask] = useState(false);

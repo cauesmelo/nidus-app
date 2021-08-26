@@ -39,6 +39,7 @@ export const Auth = ({ navigation }: AuthProps) => {
       if(user) {
       await AsyncStorage.setItem('@nidus:userData', JSON.stringify(user));
       navigation.navigate("Dashboard", user);
+      setIsLoading(false);
       } else {
         AsyncStorage.clear();
       }

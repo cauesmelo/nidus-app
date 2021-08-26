@@ -50,7 +50,7 @@ export const Settings = ({ settings, setSettings, session }:
 
           <S.Setting>
             <S.SettingTitle>
-              Via Push
+              Via SMS
             </S.SettingTitle>
             <S.SettingHandle
               onValueChange={() => toggleSwitch('push')}

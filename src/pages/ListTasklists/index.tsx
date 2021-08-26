@@ -7,8 +7,6 @@ import * as G from '../../global/styles/global';
 import { ITasklist, ITask } from '../../global/types';
 
 export const ListTasklists = ({ tasklists }: { tasklists: ITasklist[] }) => {
-
-
   return (
     <G.Container>
       <G.MainContainer>
@@ -21,7 +19,7 @@ export const ListTasklists = ({ tasklists }: { tasklists: ITasklist[] }) => {
                 return (
                   <S.CardTasklist key={key}>
                     <S.CardContainerTasklistTitle>
-                      <S.CardTasklistTitle>{tasklist.text}</S.CardTasklistTitle>
+                      <S.CardTasklistTitle>{tasklist.content}</S.CardTasklistTitle>
                       <S.DeleteTasklist>
                         <S.Delete name="eraser" ></S.Delete>
                       </S.DeleteTasklist>
@@ -35,11 +33,11 @@ export const ListTasklists = ({ tasklists }: { tasklists: ITasklist[] }) => {
                               margin: 0,
                               padding: 0,
                             }}
-                            checked={task.completed}
+                            checked={task.complete}
                             checkedColor="black"
                           />
                           <S.TaskText>
-                            {task.text}
+                            {task.content}
                           </S.TaskText>
                         </S.Task>
                       )
