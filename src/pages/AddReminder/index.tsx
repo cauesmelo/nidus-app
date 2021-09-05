@@ -17,7 +17,7 @@ export const AddReminder = ({ setReminders, reminders, session }:
   const [loading, setLoading] = useState(false);
   const [text, setText] = useState('');
   const [date, setDate] = useState<Date>(new Date(Date.now()));
-  const [validDate, setValidDate] = useState(false);
+  const [validDate, setValidDate] = useState(true);
 
   const onChange = (event: any, selectedDate: Date) => {
     const currentDate = selectedDate || date;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Alert, Text } from 'react-native';
 import uuid from 'react-native-uuid';
 
 import * as S from './styles';
@@ -9,7 +9,20 @@ import { ITasklist, ITask } from '../../global/types';
 export const ListTasklists = ({ setTasklists, tasklists }: { setTasklists: (tasklists: ITasklist[]) => void, tasklists: ITasklist[] }) => {
 
   const handleDeleteTask = (id: string) => {
-    setTasklists(tasklists.filter(i => i.id != id));
+    Alert.alert(
+      "Atenção!",
+      "Deseja excluir lista de tarefas de forma permanente?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel"
+        },
+        { text: "EXCLUIR", onPress: () => {
+          setTasklists(tasklists.filter(i => i.id != id));
+        } }
+      ]
+    );
+    
   }
   return (
     <G.Container>
