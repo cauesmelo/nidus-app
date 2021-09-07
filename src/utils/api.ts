@@ -72,14 +72,14 @@ export const getUser = async (user_id: string): Promise<IUserData | undefined> =
 
 export const setSettings = async (settings: ISettings) => {
   try {
-    const resp = await api.put('/settings/', { ...settings  })
+    const resp = await api.put('/settings/', { ...settings })
     return resp.data;
   } catch (err) {
     console.log(err);
   }
 }
 
-export const getSettings = async(user_id: string) => {
+export const getSettings = async (user_id: string) => {
   try {
     const resp = await api.get('/settings/', {
       params:
@@ -93,7 +93,7 @@ export const getSettings = async(user_id: string) => {
   }
 }
 
-export const postNote = async(content: string) => {
+export const postNote = async (content: string) => {
   try {
     const resp = await api.post('/notes/', { content })
     return resp.data;
@@ -102,7 +102,7 @@ export const postNote = async(content: string) => {
   }
 }
 
-export const postReminder = async(content: string, date: Date) => {
+export const postReminder = async (content: string, date: Date) => {
   try {
     const resp = await api.post('/reminders/', { content, date })
     return resp.data;
@@ -111,7 +111,7 @@ export const postReminder = async(content: string, date: Date) => {
   }
 }
 
-export const postTasklist = async(content: string, tasks: string[]) => {
+export const postTasklist = async (content: string, tasks: string[]) => {
   try {
     const resp = await api.post('/tasklists/', { content, tasks })
     console.log(resp.data);
@@ -121,12 +121,26 @@ export const postTasklist = async(content: string, tasks: string[]) => {
   }
 }
 
-export const getTasklists = async(user_id: string) => {
+export const getTasklists = async (user_id: string) => {
   try {
     const resp = await api.get('/tasklists/', {
       params:
       {
         user_id: user_id,
+      }
+    })
+    return resp.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const deleteTasklist = async (tasklist_id: string) => {
+  try {
+    const resp = await api.delete('/tasklists/', {
+      params:
+      {
+        tasklist_id: tasklist_id,
       }
     })
     return resp.data;

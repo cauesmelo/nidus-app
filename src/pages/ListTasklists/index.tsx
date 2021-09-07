@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Alert, Text } from 'react-native';
 import uuid from 'react-native-uuid';
-import { getTasklists, setHeader } from '../../utils/api';
+import { getTasklists, deleteTasklist, setHeader } from '../../utils/api';
 
 import * as S from './styles';
 import * as G from '../../global/styles/global';
@@ -15,7 +15,7 @@ export const ListTasklists = ({ setTasklists, tasklists, session }:
   }) => {
   setHeader(session.access_token, session.user_id);
 
-  const handleDeleteTask = (id: string) => {
+  const handleDeleteTask = async(id: string) => {
     Alert.alert(
       "Atenção!",
       "Deseja excluir lista de tarefas de forma permanente?",
@@ -25,8 +25,9 @@ export const ListTasklists = ({ setTasklists, tasklists, session }:
           style: "cancel"
         },
         {
-          text: "EXCLUIR", onPress: () => {
-            setTasklists(tasklists.filter(i => i.id != id));
+          text: "EXCLUIR", onPress: async() => {
+            await deleteTasklist(id);
+            await loadTasklists();
           }
         }
       ]
