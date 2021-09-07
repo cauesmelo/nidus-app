@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Alert, Text } from 'react-native';
 import uuid from 'react-native-uuid';
+import { getTasklists, setHeader } from '../../utils/api';
 
 import * as S from './styles';
 import * as G from '../../global/styles/global';
-import { ITasklist, ITask } from '../../global/types';
+import { ITasklist, ITask, ISession } from '../../global/types';
 
-export const ListTasklists = ({ setTasklists, tasklists }: { setTasklists: (tasklists: ITasklist[]) => void, tasklists: ITasklist[] }) => {
+export const ListTasklists = ({ setTasklists, tasklists, session }:
+  {
+    setTasklists: (tasklists: ITasklist[]) => void,
+    tasklists: ITasklist[],
+    session: ISession
+  }) => {
+  setHeader(session.access_token, session.user_id);
 
   const handleDeleteTask = (id: string) => {
     Alert.alert(
@@ -17,54 +24,66 @@ export const ListTasklists = ({ setTasklists, tasklists }: { setTasklists: (task
           text: "Cancelar",
           style: "cancel"
         },
-        { text: "EXCLUIR", onPress: () => {
-          setTasklists(tasklists.filter(i => i.id != id));
-        } }
+        {
+          text: "EXCLUIR", onPress: () => {
+            setTasklists(tasklists.filter(i => i.id != id));
+          }
+        }
       ]
     );
-    
   }
+
+  const loadTasklists = async() => {
+    const tasklists = await getTasklists(session.user_id);
+    setTasklists(tasklists);
+  }
+
+  useEffect(() => {
+    loadTasklists();
+  }, []);
+
+
   return (
     <G.Container>
       <G.MainContainer>
         <G.Main>
           <G.Title>Listas de tarefas</G.Title>
           <G.ScrollContainer>
-          {
-            tasklists.length > 0 ?
-              tasklists.slice(0).reverse().map((tasklist: ITasklist) => {
-                return (
-                  <S.CardTasklist key={tasklist.id}>
-                    <S.CardContainerTasklistTitle>
-                      <S.CardTasklistTitle>{tasklist.content}</S.CardTasklistTitle>
-                      <S.DeleteTasklist>
-                        <S.Delete name="eraser" onPress={() => handleDeleteTask(tasklist.id)}></S.Delete>
-                      </S.DeleteTasklist>
-                    </S.CardContainerTasklistTitle>
-                    {tasklist.tasks.map((task: ITask) => {
-                      const keyTask = uuid.v4().toString();
-                      return (
-                        <S.Task key={keyTask}>
-                          <S.InputCheckBox
-                            containerStyle={{
-                              margin: 0,
-                              padding: 0,
-                            }}
-                            checked={task.complete}
-                            checkedColor="black"
-                          />
-                          <S.TaskText>
-                            {task.content}
-                          </S.TaskText>
-                        </S.Task>
-                      )
-                    })}
-                  </S.CardTasklist>
-                )
-              })
-              :
-              <Text>Nenhuma lista de tarefa criada</Text>
-          }
+            {
+              tasklists.length > 0 ?
+                tasklists.map((tasklist: ITasklist) => {
+                  return (
+                    <S.CardTasklist key={tasklist.id}>
+                      <S.CardContainerTasklistTitle>
+                        <S.CardTasklistTitle>{tasklist.content}</S.CardTasklistTitle>
+                        <S.DeleteTasklist>
+                          <S.Delete name="eraser" onPress={() => handleDeleteTask(tasklist.id)}></S.Delete>
+                        </S.DeleteTasklist>
+                      </S.CardContainerTasklistTitle>
+                      {tasklist.tasks.map((task: ITask) => {
+                        const keyTask = uuid.v4().toString();
+                        return (
+                          <S.Task key={keyTask}>
+                            {/* <S.InputCheckBox
+                              containerStyle={{
+                                margin: 0,
+                                padding: 0,
+                              }}
+                              checked={false}
+                              checkedColor="black"
+                            /> */}
+                            <S.TaskText>
+                              {task.content}
+                            </S.TaskText>
+                          </S.Task>
+                        )
+                      })}
+                    </S.CardTasklist>
+                  )
+                })
+                :
+                <Text>Nenhuma lista de tarefa criada</Text>
+            }
           </G.ScrollContainer>
         </G.Main>
       </G.MainContainer>

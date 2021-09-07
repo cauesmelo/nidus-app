@@ -18,7 +18,6 @@ export interface IReminder {
 export interface ITask {
   id: string;
   tasklist_id: string;
-  complete: boolean;
   content: string;
 }
 

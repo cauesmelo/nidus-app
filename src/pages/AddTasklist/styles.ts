@@ -80,6 +80,7 @@ export const TaskText = styled.Text`
 flex: 1;
 justify-content: center;
 align-items: center;
+margin-left: 25px;
 `;
 
 export const BorderTop = styled.View`

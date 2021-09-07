@@ -8,10 +8,10 @@ import { IReminder, ISession } from '../../global/types';
 import { postReminder, setHeader } from '../../utils/api';
 import { Alert } from 'react-native';
 
-export const AddReminder = ({ setReminders, reminders, session }:
+export const AddReminder = ({ setReminders, session }:
   {
     setReminders: (reminders: IReminder[]) => void,
-    reminders: IReminder[], session: ISession
+    session: ISession
   }) => {
   setHeader(session.access_token, session.user_id);
   const [loading, setLoading] = useState(false);

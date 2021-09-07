@@ -28,7 +28,7 @@ export const InputCheckBox = styled(CheckBox)`
 `;
 
 export const TaskText = styled.Text`
-margin-left: -10px;
+margin-left: 15px;
 `;
 
 export const CardContainerTasklistTitle = styled.View`

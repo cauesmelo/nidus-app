@@ -72,6 +72,10 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
     setPage('ListTasklists')
   }
 
+  const handleCancelAddTasklist = () => {
+    setPage('ListTasklists');
+  }
+
   const handleLogout = async () => {
     await AsyncStorage.removeItem('@nidus:userData');
     navigation.navigate("Auth");
@@ -82,15 +86,26 @@ export const Dashboard = ({ navigation, route }: DashboardProps) => {
       case 'ListNotes':
         return <ListNotes notes={notes} />
       case 'AddNote':
-        return <AddNote setNotes={(n: INote[]) => handleAddNote(n)} notes={notes} session={session} />
+        return <AddNote setNotes={(n: INote[]) => handleAddNote(n)}
+          notes={notes}
+          session={session} />
       case 'AddReminder':
-        return <AddReminder session={session} setReminders={(r: IReminder[]) => handleAddReminders(r)} reminders={reminders} />
+        return <AddReminder session={session}
+          setReminders={(r: IReminder[]) => handleAddReminders(r)} />
       case 'ListReminders':
         return <ListReminders reminders={reminders} />
       case 'ListTasklists':
-        return <ListTasklists tasklists={tasklists} setTasklists={(t: ITasklist[]) => handleAddTasklist(t)} />
+        return <ListTasklists 
+        tasklists={tasklists} 
+        session={session}
+        setTasklists={(t: ITasklist[]) => handleAddTasklist(t)} 
+        />
       case 'AddTasklist':
-        return <AddTasklist setTasklists={(t: ITasklist[]) => handleAddTasklist(t)} tasklists={tasklists} />
+        return <AddTasklist
+          setTasklists={(t: ITasklist[]) => handleAddTasklist(t)}
+          session={session}
+          cancelAddTasklist={handleCancelAddTasklist}
+        />
       case 'Settings':
         return <Settings
           setSettings={(settings: ISettings) => setSettings(settings)}

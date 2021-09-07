@@ -105,7 +105,30 @@ export const postNote = async(content: string) => {
 export const postReminder = async(content: string, date: Date) => {
   try {
     const resp = await api.post('/reminders/', { content, date })
+    return resp.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const postTasklist = async(content: string, tasks: string[]) => {
+  try {
+    const resp = await api.post('/tasklists/', { content, tasks })
     console.log(resp.data);
+    return resp.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const getTasklists = async(user_id: string) => {
+  try {
+    const resp = await api.get('/tasklists/', {
+      params:
+      {
+        user_id: user_id,
+      }
+    })
     return resp.data;
   } catch (err) {
     console.log(err);
