@@ -1,26 +1,33 @@
 import React, { useState } from 'react';
-import { getSettings, setSettings as setSettingsAPI, setHeader } from '../../utils/api';
+import { getSettings, setSettings as setSettingsAPI, setHeader, setNumber as setNumberAPI } from '../../utils/api';
 import * as S from './styles';
 import * as G from '../../global/styles/global';
 import { useEffect } from 'react';
 import { ISettings, ISession } from '../../global/types';
+import { Text } from 'react-native';
 
 export const Settings = ({ settings, setSettings, session }:
   { settings: ISettings, setSettings: (newSettings: ISettings) => void, session: ISession }) => {
-    setHeader(session.access_token, session.user_id);
+  setHeader(session.access_token, session.user_id);
+  const [insertNumber, setInsertNumber] = useState(false);
+  const [number, setNumber] = useState('');
 
   const loadSettings = async () => {
     setSettings(await getSettings(settings.user_id));
   }
 
   const toggleSwitch = async (input: string) => {
-    // @ts-ignore
-    setSettings((prevState) => {
-      return {
-        ...prevState,
-        [input]: !prevState[input]
-      }
-    });
+    if (input === 'push' && !settings.push) {
+      setInsertNumber(true);
+    } else {
+      // @ts-ignore
+      setSettings((prevState) => {
+        return {
+          ...prevState,
+          [input]: !prevState[input]
+        }
+      });
+    }
   }
 
   useEffect(() => {
@@ -29,7 +36,36 @@ export const Settings = ({ settings, setSettings, session }:
 
   useEffect(() => {
     loadSettings();
-  }, [])
+  }, []);
+
+  const handleChangeNumber = (text: string) => {
+    setNumber(text);
+  }
+
+  const handleCancelNumber = () => {
+    // @ts-ignore
+    setSettings((prevState) => {
+      return {
+        ...prevState,
+        push: false
+      }
+    });
+    setInsertNumber(false);
+  }
+
+  const handleSetNumber = async() => {
+    if(await setNumberAPI(number)){
+      // @ts-ignore
+      setSettings((prevState) => {
+        return {
+          ...prevState,
+          push: true
+        }
+      });
+      setInsertNumber(false);
+    }
+      
+  }
 
   return (
     <G.Container>
@@ -49,13 +85,37 @@ export const Settings = ({ settings, setSettings, session }:
           </S.Setting>
 
           <S.Setting>
-            <S.SettingTitle>
-              Via SMS
-            </S.SettingTitle>
-            <S.SettingHandle
-              onValueChange={() => toggleSwitch('push')}
-              value={settings.push}
-            />
+            {insertNumber ? (
+              <S.InsertContainer>
+                <S.LineContainer>
+                  <S.SettingTitle>Insira seu número:</S.SettingTitle>
+                  <S.NumberInput
+                    value={number}
+                    onChangeText={(text: string) => handleChangeNumber(text)}
+                  />
+                </S.LineContainer>
+                <S.LineContainer>
+                  <S.Button onPress={handleCancelNumber}>
+                    <Text>Cancelar</Text>
+                  </S.Button>
+                  <S.Button onPress={handleSetNumber}>
+                    <Text>Confirmar</Text>
+                  </S.Button>
+
+                </S.LineContainer>
+              </S.InsertContainer>
+            ) : (
+              <>
+                <S.SettingTitle>
+                  Via SMS
+                </S.SettingTitle>
+                <S.SettingHandle
+                  onValueChange={() => toggleSwitch('push')}
+                  value={settings.push}
+                />
+              </>
+            )}
+
           </S.Setting>
 
           <G.Title1>Integração com Twitter</G.Title1>
@@ -90,7 +150,7 @@ export const Settings = ({ settings, setSettings, session }:
           </S.Setting>
 
         </G.Main>
-      </G.MainContainer>
-    </G.Container>
+      </G.MainContainer >
+    </G.Container >
   )
 }

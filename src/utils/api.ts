@@ -149,4 +149,13 @@ export const deleteTasklist = async (tasklist_id: string) => {
   }
 }
 
+export const setNumber = async(number: string) => {
+  try {
+    const resp = await api.post('/user/number', { number })
+    return resp.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export default api;
