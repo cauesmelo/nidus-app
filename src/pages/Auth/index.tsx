@@ -86,6 +86,7 @@ export const Auth = ({ navigation }: AuthProps) => {
       if (userData) {
         await AsyncStorage.setItem('@nidus:userData', JSON.stringify(userData));
         navigation.navigate("Dashboard", userData);
+        setIsLoading(false);
       } else throw Error('No response');
 
     } catch (err) {
