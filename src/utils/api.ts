@@ -114,7 +114,6 @@ export const postReminder = async (content: string, date: Date) => {
 export const postTasklist = async (content: string, tasks: string[]) => {
   try {
     const resp = await api.post('/tasklists/', { content, tasks })
-    console.log(resp.data);
     return resp.data;
   } catch (err) {
     console.log(err);
