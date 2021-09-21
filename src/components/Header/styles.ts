@@ -15,21 +15,24 @@ export const Data = styled.Text`
 height: 50px;
   font-family: ${({ theme }) => theme.fonts.bold};
   font-size: 35px;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const ContainerData = styled.View`
 height: 50px;
 margin-left: 5px;
   flex: 1;
+  
 `;
 
 export const Weekday = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: 18px;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const Month = styled.Text`
-  color: ${({ theme }) => theme.colors.alternative};
+  color: ${({ theme }) => theme.colors.primary};
   font-family: ${({ theme }) => theme.fonts.light};
   font-size: 13px;
 `;

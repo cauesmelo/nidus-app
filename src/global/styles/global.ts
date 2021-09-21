@@ -4,6 +4,7 @@ import { ActivityIndicator } from 'react-native';
 export const Title = styled.Text`
   font-size: 30px;
   margin: 20px;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const LargeTitle = styled.Text`

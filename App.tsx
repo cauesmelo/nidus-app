@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { AppRoutes } from './src/routes/app.routes';
 
-import theme from './src/global/styles/theme';
+import theme, { orange } from './src/global/styles/theme';
 
 import {
   useFonts,
@@ -29,7 +29,7 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={orange}>
       <AppRoutes />
     </ThemeProvider>
   );

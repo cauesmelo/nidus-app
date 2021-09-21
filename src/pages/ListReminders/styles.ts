@@ -16,12 +16,18 @@ export const ReminderContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const ReminderTitle = styled.Text`
 max-width: 180px;
+color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const ReminderDate = styled.Text`
 color: ${({ theme }) => theme.colors.alternative};
+`;
+
+export const Text = styled.Text`
+color: ${({ theme }) => theme.colors.primary};
 `;

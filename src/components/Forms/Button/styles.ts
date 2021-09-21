@@ -13,6 +13,7 @@ background-color: ${props => props.disabled === true ?
     ({ theme }) => theme.colors.alternativeLight :
     ({ theme }) => theme.colors.primary
   };
+
 `;
 
 export const Title = styled.Text`

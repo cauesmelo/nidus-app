@@ -20,23 +20,23 @@ export const ListReminders = ({ reminders }: { reminders: IReminder[] }) => {
         <G.Main>
           <G.Title>Lembretes</G.Title>
           <G.ScrollContainer>
-          {
-            reminders.length > 0 ?
-              reminders.slice(0).reverse().map((r: IReminder) => {
-                const key = uuid.v4().toString();
-                const dateFormatted = formatDate(r.date);
-                return (
-                  <S.CardReminder key={key}>
-                    <S.ReminderContainer>
-                    <S.ReminderTitle>{r.content}</S.ReminderTitle>
-                    <S.ReminderDate>{dateFormatted}</S.ReminderDate>
-                    </S.ReminderContainer>
-                  </S.CardReminder>
-                )
-              })
-              :
-              <Text>Nehuma lembrete criado</Text>
-          }
+            {
+              reminders.length > 0 ?
+                reminders.slice(0).reverse().map((r: IReminder) => {
+                  const key = uuid.v4().toString();
+                  const dateFormatted = formatDate(r.date);
+                  return (
+                    <S.CardReminder key={key}>
+                      <S.ReminderContainer>
+                        <S.ReminderTitle>{r.content}</S.ReminderTitle>
+                        <S.ReminderDate>{dateFormatted}</S.ReminderDate>
+                      </S.ReminderContainer>
+                    </S.CardReminder>
+                  )
+                })
+                :
+                <S.Text>Nehuma lembrete criado</S.Text>
+            }
           </G.ScrollContainer>
         </G.Main>
       </G.MainContainer>

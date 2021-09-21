@@ -26,18 +26,18 @@ export const AddReminder = ({ setReminders, session }:
   };
 
   const handleAddReminder = async () => {
-      setLoading(true);
-      try {
-        const newReminder = await postReminder(text, date);
-        if (!newReminder) throw new Error('Erro ao processar lembrete, verifique o servidor.')
-        // @ts-ignore
-        setReminders(prevState => ([...prevState, newReminder]))
-      } catch (err) {
-        console.log('Server error:');
-        console.log(err);
-        setLoading(false);
-        Alert.alert('Ocorreu um erro. Tente mais tarde novamente.');
-      }
+    setLoading(true);
+    try {
+      const newReminder = await postReminder(text, date);
+      if (!newReminder) throw new Error('Erro ao processar lembrete, verifique o servidor.')
+      // @ts-ignore
+      setReminders(prevState => ([...prevState, newReminder]))
+    } catch (err) {
+      console.log('Server error:');
+      console.log(err);
+      setLoading(false);
+      Alert.alert('Ocorreu um erro. Tente mais tarde novamente.');
+    }
   }
 
   const handleGetText = (text: string) => {
@@ -59,7 +59,7 @@ export const AddReminder = ({ setReminders, session }:
             maxLength={260} getText={(r: string) => handleGetText(r)}
           />
           <DateTimePicker
-            style={{ width: '100%', backgroundColor: 'white' }}
+            style={{ width: '100%', backgroundColor: ({ theme }) => theme.colors.alternativeSecondary }}
             testID="dateTimePicker"
             value={date}
             display="spinner"

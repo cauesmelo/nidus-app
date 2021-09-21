@@ -13,17 +13,17 @@ export const ListNotes = ({ notes }: { notes: INote[] }) => {
         <G.Main>
           <G.Title>Notas</G.Title>
           <G.ScrollContainer>
-          {
-            notes.length > 0 ?
-              notes.slice(0).reverse().map((n: INote) => {
-                const key = uuid.v4().toString();
-                return (
-                  <S.CardNote key={key}>{n.content}</S.CardNote>
-                )
-              })
-              :
-              <Text>Nehuma nota criada</Text>
-          }
+            {
+              notes.length > 0 ?
+                notes.slice(0).reverse().map((n: INote) => {
+                  const key = uuid.v4().toString();
+                  return (
+                    <S.CardNote key={key}>{n.content}</S.CardNote>
+                  )
+                })
+                :
+                <S.Text>Nehuma nota criada</S.Text>
+            }
           </G.ScrollContainer>
         </G.Main>
       </G.MainContainer>

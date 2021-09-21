@@ -11,6 +11,7 @@ justify-content: space-between;
 `;
 
 export const SettingTitle = styled.Text`
+color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const SettingHandle = styled.Switch`
@@ -21,6 +22,7 @@ export const NumberInput = styled(TextInput)`
   width: 150px;
   text-align:center;
   margin-left: 10px;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const LineContainer = styled.View`

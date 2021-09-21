@@ -17,4 +17,5 @@ export const MaxChar = styled.Text`
 text-align: right;
 margin-right: 10px;
 margin-top: 10px;
+color: ${({ theme }) => theme.colors.primary};
 `;

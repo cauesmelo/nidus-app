@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import { TextInput } from 'react-native';
 import { CheckBox } from 'react-native-elements'
 import { Entypo } from '@expo/vector-icons';
@@ -9,16 +9,17 @@ interface TitleInputProps {
   active: boolean;
 }
 
-export const TitleInput = styled(TextInput)<TitleInputProps>`
+export const TitleInput = styled(TextInput) <TitleInputProps>`
 border:1px solid ${({ theme }) => theme.colors.alternativeLight};
 padding: 10px 10px;
 border-radius: 10px;
 font-size: 16px;
 padding: 15px;
+color: ${({ theme }) => theme.colors.primary};
 
 ${props => !props.active && css`
 border: none;
-color: black;
+color: ${({ theme }) => theme.colors.primary};
 font-weight: bold;
 `}
 `;
@@ -26,6 +27,7 @@ font-weight: bold;
 export const CharCount = styled.Text`
 margin-top: 20px;
 text-align: right;
+color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const Tasks = styled.View`
@@ -100,6 +102,7 @@ flex-direction: row;
 
 export const AddTaskButtonText = styled.Text`
 margin-left: 10px;
+color:${({ theme }) => theme.colors.primary};
 `;
 
 export const Plus = styled(Entypo)`

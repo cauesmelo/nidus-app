@@ -52,3 +52,6 @@ color:${({ theme }) => theme.colors.primary};
 font-size: 10px;
 `;
 
+export const Text = styled.Text`
+color: ${({ theme }) => theme.colors.primary};
+`;

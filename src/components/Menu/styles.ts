@@ -35,30 +35,30 @@ export const Button = styled(TouchableOpacity)`
   max-width: 60px;
 `;
 
-export const ButtonClock = styled(Button)<ButtonProps>`
+export const ButtonClock = styled(Button) <ButtonProps>`
   margin-left: ${props => (props.page !== 'Settings')
-   ? '80px' : '0px'};
+    ? '80px' : '0px'};
   background-color:
   ${props => (props.page == 'ListReminders')
-   ? ({ theme }) => theme.colors.alternativeLight : 'white'};
+    ? ({ theme }) => theme.colors.alternativeLight : ({ theme }) => theme.colors.secondary};
 `;
 
-export const ButtonDiary = styled(Button)<ButtonProps>`
+export const ButtonDiary = styled(Button) <ButtonProps>`
   background-color:
   ${props => (props.page == 'ListNotes')
-   ? ({ theme }) => theme.colors.alternativeLight : 'white'};
+    ? ({ theme }) => theme.colors.alternativeLight : ({ theme }) => theme.colors.secondary};
 `;
 
-export const ButtonList = styled(Button)<ButtonProps>`
+export const ButtonList = styled(Button) <ButtonProps>`
   background-color:
   ${props => (props.page == 'ListTasklists')
-   ? ({ theme }) => theme.colors.alternativeLight : 'white'};
+    ? ({ theme }) => theme.colors.alternativeLight : ({ theme }) => theme.colors.secondary};
 `;
 
-export const ButtonSettings = styled(Button)<ButtonProps>`
+export const ButtonSettings = styled(Button) <ButtonProps>`
   background-color:
   ${props => (props.page == 'Settings')
-   ? ({ theme }) => theme.colors.alternativeLight : 'white'};
+    ? ({ theme }) => theme.colors.alternativeLight : ({ theme }) => theme.colors.secondary};
 `;
 
 export const Diary = styled(Entypo)`
@@ -83,23 +83,22 @@ background-color: ${({ theme }) => theme.colors.alternativeLight};
 
 export const AddBackground = styled.View<PageProps>`
 border-radius: 25px;
-background-color: ${
-props => props.page.includes('Add') ? ({ theme }) => theme.colors.primary 
-: ({ theme }) => theme.colors.secondary
-};
+background-color: ${props => props.page.includes('Add') ? ({ theme }) => theme.colors.primary
+    : ({ theme }) => theme.colors.secondary
+  };
 `;
 
-export const Add = styled(Entypo)<PageProps>`
-color: ${props => props.page.includes('Add') ? ({ theme }) => theme.colors.secondary 
-: ({ theme }) => theme.colors.primary};
+export const Add = styled(Entypo) <PageProps>`
+color: ${props => props.page.includes('Add') ? ({ theme }) => theme.colors.secondary
+    : ({ theme }) => theme.colors.primary};
 font-size: 40px;
 padding:10px;
 `;
-export const Clock = styled(Entypo)<PageProps>`
+export const Clock = styled(Entypo) <PageProps>`
 color: ${({ theme }) => theme.colors.primary};
 font-size: ${iconSize};
 `;
-export const Settings = styled(Entypo)<PageProps>`
+export const Settings = styled(Entypo) <PageProps>`
 color: ${({ theme }) => theme.colors.primary};
 font-size: ${iconSize};
 `;

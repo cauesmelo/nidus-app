@@ -15,7 +15,7 @@ export const ListTasklists = ({ setTasklists, tasklists, session }:
   }) => {
   setHeader(session.access_token, session.user_id);
 
-  const handleDeleteTask = async(id: string) => {
+  const handleDeleteTask = async (id: string) => {
     Alert.alert(
       "Atenção!",
       "Deseja excluir lista de tarefas de forma permanente?",
@@ -25,7 +25,7 @@ export const ListTasklists = ({ setTasklists, tasklists, session }:
           style: "cancel"
         },
         {
-          text: "EXCLUIR", onPress: async() => {
+          text: "EXCLUIR", onPress: async () => {
             await deleteTasklist(id);
             await loadTasklists();
           }
@@ -34,7 +34,7 @@ export const ListTasklists = ({ setTasklists, tasklists, session }:
     );
   }
 
-  const loadTasklists = async() => {
+  const loadTasklists = async () => {
     const tasklists = await getTasklists(session.user_id);
     setTasklists(tasklists);
   }
@@ -83,7 +83,7 @@ export const ListTasklists = ({ setTasklists, tasklists, session }:
                   )
                 })
                 :
-                <Text>Nenhuma lista de tarefa criada</Text>
+                <S.Text>Nenhuma lista de tarefa criada</S.Text>
             }
           </G.ScrollContainer>
         </G.Main>
