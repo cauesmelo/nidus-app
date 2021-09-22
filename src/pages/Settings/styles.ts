@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 export const Setting = styled.View`
 border:1px solid ${({ theme }) => theme.colors.alternativeLight};
-padding: 20px;
+padding:20px;
 flex: 1;
 flex-direction: row;
 align-items: center;
@@ -26,6 +26,7 @@ export const NumberInput = styled(TextInput)`
 `;
 
 export const LineContainer = styled.View`
+border:2px solid red;
   flex: 1;
   flex-direction: row;
   justify-content: space-around;
@@ -41,4 +42,16 @@ export const Button = styled(TouchableOpacity)`
 
 export const InsertContainer = styled.View`
   width: 100%;
+`;
+
+export const Text = styled.Text`
+color: ${({ theme }) => theme.colors.primary};
+`;
+
+export const ColorSelector = styled.TouchableOpacity<{ color: string }>`
+  height: 30px;
+  width: 30px;
+  border-radius: 25px;
+  border:1px solid ${({ theme }) => theme.colors.alternative};
+  background-color: ${props => props.color};
 `;

@@ -1,12 +1,8 @@
 import 'react-native-gesture-handler';
-
 import React from 'react';
 import AppLoading from 'expo-app-loading';
-import { ThemeProvider } from 'styled-components';
-
 import { AppRoutes } from './src/routes/app.routes';
-
-import theme, { orange } from './src/global/styles/theme';
+import { ThemeContextProvider } from './ThemeContext';
 
 import {
   useFonts,
@@ -23,15 +19,14 @@ export default function App() {
     Poppins_600SemiBold,
     Poppins_700Bold
   });
-
   if (!fontsLoaded) {
     return <AppLoading />
   }
 
   return (
-    <ThemeProvider theme={orange}>
+    <ThemeContextProvider>
       <AppRoutes />
-    </ThemeProvider>
+    </ThemeContextProvider>
   );
 }
 
